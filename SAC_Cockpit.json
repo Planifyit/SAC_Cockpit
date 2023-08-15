@@ -51,7 +51,11 @@
         "buttonColor": {
             "type": "string",
             "default": "#007BFF"
-        }
+        },
+     "modelId": {
+        "type": "string",
+        "default": ""
+    }
     },
     "methods": {
         "refresh": {
