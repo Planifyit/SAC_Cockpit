@@ -1,0 +1,82 @@
+{
+    "name": "sac_cockpit",
+    "description": "SAC Cockpit Widget for Administrators",
+    "newInstancePrefix": "sac_cockpit",
+    "eula": "",
+    "vendor": "Planifyit",
+    "license": "",
+    "id": "sac_cockpit",
+    "version": "1.0.0",
+    "icon": "https://planifyit.github.io/Pie_chart/PlanifyIT_Logo2.png",
+    "webcomponents": [
+        {
+            "kind": "main",
+            "tag": "sac-cockpit-widget",
+            "url": "https://planifyit.github.io/SAC_Cockpit/SACCockpitWidget.js",
+            "integrity": "",
+            "ignoreIntegrity": true
+        },
+        {
+            "kind": "styling",
+            "tag": "com-sap-sample-sac-cockpit-styling",
+            "url": "https://planifyit.github.io/SAC_Cockpit/style-panel.js",
+            "integrity": "",
+            "ignoreIntegrity": true
+        },
+        {
+            "kind": "builder",
+            "tag": "com-sap-sample-sac-cockpit-builder",
+            "url": "https://planifyit.github.io/SAC_Cockpit/builder-panel.js",
+            "integrity": "",
+            "ignoreIntegrity": true
+        }
+    ],
+    "properties": {
+        "width": {
+            "type": "integer",
+            "default": 500
+        },
+        "height": {
+            "type": "integer",
+            "default": 600
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#FFFFFF"
+        },
+        "headerColor": {
+            "type": "string",
+            "default": "#333333"
+        },
+        "buttonColor": {
+            "type": "string",
+            "default": "#007BFF"
+        }
+    },
+    "methods": {
+        "refresh": {
+            "description": "Refresh the cockpit view"
+        }
+    },
+    "events": {
+        "onActionTriggered": {
+            "description": "Called when an administrative action is triggered."
+        }
+    },
+    "dataBindings": {
+        "adminDataBinding": {
+            "feeds": [
+                {
+                    "id": "dimensions",
+                    "description": "Dimensions",
+                    "type": "dimension"
+                },
+                {
+                    "id": "measures",
+                    "description": "Measures",
+                    "type": "mainStructureMember"
+                }
+            ]
+        }
+    }
+}
