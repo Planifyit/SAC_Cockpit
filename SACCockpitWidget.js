@@ -72,11 +72,11 @@
         
 onCustomWidgetAfterUpdate(changedProperties) {
 
-  if ("modelId" in changedProperties) {
-        this._modelId = changedProperties["modelId"];
-        // Handle the model ID as needed
+   if ("modelId" in changedProperties) {
+        let updatedModelId = changedProperties["modelId"];
+  
+        window.alert(`Model ID: ${updatedModelId}`);
     }
-    
     }     
 
 connectedCallback() {
