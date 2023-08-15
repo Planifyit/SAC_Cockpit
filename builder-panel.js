@@ -33,13 +33,13 @@
             this.dispatchEvent(modelChangeEvent);
         }
 
-        set model(value) {
-            this._modelInput.value = value;
-        }
+    set modelId(newModelId) {
+    this._shadowRoot.getElementById("builder_model_id").value = newModelId;
+}
 
-        get model() {
-            return this._modelInput.value;
-        }
+get modelId() {
+    return this._shadowRoot.getElementById("builder_model_id").value;
+}
     }
 
     customElements.define('sac-cockpit-builder', BuilderPanel);
