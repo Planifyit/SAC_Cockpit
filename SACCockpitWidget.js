@@ -48,7 +48,7 @@
     `;
    
  
-    class Calculator extends HTMLElement {
+    class SACCockpit  extends HTMLElement {
     constructor() {
         super();
         this._shadowRoot = this.attachShadow({mode: 'open'});
@@ -88,8 +88,6 @@ _manageVersions() {
         }
     }
 
-    customElements.define('sac-cockpit-widget', SACCockpit);
-})();
-  
-          
+customElements.define('sac-cockpit-widget', SACCockpit);
+})();    
   
