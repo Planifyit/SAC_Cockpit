@@ -68,5 +68,5 @@
 		}
 	}
 
-	customElements.define("com-sap-sample-calculator-styling", CalculatorStylingPanel);
+	customElements.define("com-sap-sample-sac-cockpit-styling", CalculatorStylingPanel);
 })();
