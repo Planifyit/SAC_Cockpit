@@ -1,4 +1,4 @@
-(function() {
+ (function() {
     let tmpl = document.createElement('template');
     tmpl.innerHTML = `
         <style>
@@ -10,17 +10,16 @@
                 display: block;
                 margin-bottom: 5px;
             }
-            .model-inputs {
-                margin-bottom: 10px;
-            }
         </style>
         <form id="form">
             <fieldset>
                 <legend>Properties</legend>
-                <div class="model-inputs">
-                    <!-- Model inputs will be dynamically added here -->
-                </div>
-                <button type="button" id="addLine">+</button>
+                <table>
+                    <tr>
+                        <td><label for="builder_model_id">Model ID:</label></td>
+                        <td><input id="builder_model_id" type="text"></td>
+                    </tr>
+                </table>
                 <input type="submit" style="display:none;">
             </fieldset>
         </form>
@@ -31,53 +30,27 @@
             super();
             this._shadowRoot = this.attachShadow({ mode: 'open' });
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
-            
-            this._modelInputsContainer = this._shadowRoot.querySelector('.model-inputs');
-            this._shadowRoot.getElementById("addLine").addEventListener("click", () => this._addLine());
-            this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
-        }
-
-        connectedCallback() {
-            if (this.modelIds && this.modelIds.length) {
-                this.modelIds.forEach(id => this._addLine(id));
-            }
-        }
-
-        _addLine(value = '') {
-            let input = document.createElement('input');
-            input.type = 'text';
-            input.className = 'model-input';
-            input.value = value;
-            input.addEventListener('input', this._submit.bind(this)); // Update on input
-            this._modelInputsContainer.appendChild(input);
-            this._modelInputsContainer.appendChild(document.createElement('br')); // Add a line break
+    this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
+  
         }
 
         _submit(e) {
-            if (e) e.preventDefault();
-this.dispatchEvent(new CustomEvent("propertiesChanged", {
-    detail: {
-        properties: {
-            modelIds: this.modelIds
-        }
-    },
-    bubbles: true,
-    composed: true
-}));
-
+            e.preventDefault();
+            this.dispatchEvent(new CustomEvent("propertiesChanged", {
+                detail: {
+                    properties: {
+                        modelId: this.modelId
+                    }
+                }
+            }));
         }
 
-        set modelIds(ids) {
-            // Clear existing inputs
-            this._modelInputsContainer.innerHTML = '';
-
-            // Create and populate new inputs
-            ids.forEach(id => this._addLine(id));
+        set modelId(newModelId) {
+                	this._shadowRoot.getElementById("builder_model_id").value = newModelId;
         }
 
-        get modelIds() {
-            // Collect all model IDs from the input fields
-            return Array.from(this._shadowRoot.querySelectorAll('.model-input')).map(input => input.value);
+        get modelId() {
+            return this._shadowRoot.getElementById("builder_model_id").value;
         }
     }
 
