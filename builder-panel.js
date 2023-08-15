@@ -30,7 +30,6 @@
                     </tr>
                 </table>
                 <span id="addButton">+</span>
-                <input type="submit" style="display:none;">
             </fieldset>
         </form>
     `;
@@ -41,19 +40,8 @@
             this._shadowRoot = this.attachShadow({ mode: 'open' });
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
 
-            this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
             this._shadowRoot.getElementById("addButton").addEventListener("click", this._addSecondLine.bind(this));
-        }
-
-        _submit(e) {
-            e.preventDefault();
-            this.dispatchEvent(new CustomEvent("propertiesChanged", {
-                detail: {
-                    properties: {
-                        modelIds: [this._shadowRoot.getElementById("builder_model_id").value, this._shadowRoot.getElementById("builder_model_id_2").value]
-                    }
-                }
-            }));
+            this._shadowRoot.getElementById("form").addEventListener("input", this._submit.bind(this));
         }
 
         _addSecondLine() {
@@ -61,21 +49,32 @@
             this._shadowRoot.getElementById("addButton").style.display = "none";
         }
 
-        set modelIds(ids) {
-            if (ids && ids.length > 0) {
-                this._shadowRoot.getElementById("builder_model_id").value = ids[0] || '';
-                if (ids.length > 1) {
-                    this._shadowRoot.getElementById("builder_model_id_2").value = ids[1];
-                    this._addSecondLine();
-                }
-            }
-        }
-
-        get modelIds() {
-            return [
+        _submit() {
+            let modelIdsArray = [
                 this._shadowRoot.getElementById("builder_model_id").value,
                 this._shadowRoot.getElementById("builder_model_id_2").value
             ];
+            this.modelIds = JSON.stringify(modelIdsArray);
+            this.dispatchEvent(new CustomEvent("propertiesChanged", {
+                detail: {
+                    properties: {
+                        modelIds: this.modelIds
+                    }
+                }
+            }));
+        }
+
+        set modelIds(value) {
+            let modelIdsArray = JSON.parse(value);
+            this._shadowRoot.getElementById("builder_model_id").value = modelIdsArray[0] || '';
+            this._shadowRoot.getElementById("builder_model_id_2").value = modelIdsArray[1] || '';
+        }
+
+        get modelIds() {
+            return JSON.stringify([
+                this._shadowRoot.getElementById("builder_model_id").value,
+                this._shadowRoot.getElementById("builder_model_id_2").value
+            ]);
         }
     }
 
