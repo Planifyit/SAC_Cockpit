@@ -10,20 +10,17 @@
                 display: block;
                 margin-bottom: 5px;
             }
-            .input-container {
+            .model-inputs {
                 margin-bottom: 10px;
             }
         </style>
         <form id="form">
             <fieldset>
                 <legend>Properties</legend>
-                <div id="inputList">
-                    <div class="input-container">
-                        <label for="builder_model_id_0">Model ID:</label>
-                        <input id="builder_model_id_0" type="text">
-                    </div>
+                <div class="model-inputs">
+                    <!-- Model inputs will be dynamically added here -->
                 </div>
-                <button id="addLine">+</button>
+                <button type="button" id="addLine">+</button>
                 <input type="submit" style="display:none;">
             </fieldset>
         </form>
@@ -34,37 +31,49 @@
             super();
             this._shadowRoot = this.attachShadow({ mode: 'open' });
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
-            this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
+            
+            this._modelInputsContainer = this._shadowRoot.querySelector('.model-inputs');
             this._shadowRoot.getElementById("addLine").addEventListener("click", this._addLine.bind(this));
-            this._inputCount = 1; // to keep track of the number of inputs
+            this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
+        }
+
+        _addLine() {
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'model-input';
+            input.addEventListener('input', this._submit.bind(this)); // Update on input
+            this._modelInputsContainer.appendChild(input);
         }
 
         _submit(e) {
             e.preventDefault();
-            // Handle the submission of multiple model IDs
-            let modelIds = [];
-            for (let i = 0; i < this._inputCount; i++) {
-                modelIds.push(this._shadowRoot.getElementById(`builder_model_id_${i}`).value);
-            }
             this.dispatchEvent(new CustomEvent("propertiesChanged", {
                 detail: {
                     properties: {
-                        modelIds: modelIds
+                        modelIds: this.modelIds
                     }
                 }
             }));
         }
 
-        _addLine(e) {
-            e.preventDefault();
-            let newInputContainer = document.createElement('div');
-            newInputContainer.classList.add('input-container');
-            newInputContainer.innerHTML = `
-                <label for="builder_model_id_${this._inputCount}">Model ID:</label>
-                <input id="builder_model_id_${this._inputCount}" type="text">
-            `;
-            this._shadowRoot.getElementById("inputList").appendChild(newInputContainer);
-            this._inputCount++;
+        set modelIds(ids) {
+            // Clear current input fields
+            this._modelInputsContainer.innerHTML = '';
+
+            // Create a new input field for each model ID
+            ids.forEach(id => {
+                let input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'model-input';
+                input.value = id;
+                input.addEventListener('input', this._submit.bind(this)); // Update on input
+                this._modelInputsContainer.appendChild(input);
+            });
+        }
+
+        get modelIds() {
+            // Collect all model IDs from the input fields
+            return Array.from(this._shadowRoot.querySelectorAll('.model-input')).map(input => input.value);
         }
     }
 
