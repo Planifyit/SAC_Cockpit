@@ -37,10 +37,11 @@
             this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
         }
 
-        _addLine() {
+        _addLine(value = '') {
             let input = document.createElement('input');
             input.type = 'text';
             input.className = 'model-input';
+            input.value = value;
             input.addEventListener('input', this._submit.bind(this)); // Update on input
             this._modelInputsContainer.appendChild(input);
         }
@@ -57,17 +58,14 @@
         }
 
         set modelIds(ids) {
-            // Clear current input fields
-            this._modelInputsContainer.innerHTML = '';
+            // If there are more IDs than inputs, add the necessary inputs
+            while (this._modelInputsContainer.children.length < ids.length) {
+                this._addLine();
+            }
 
-            // Create a new input field for each model ID
-            ids.forEach(id => {
-                let input = document.createElement('input');
-                input.type = 'text';
-                input.className = 'model-input';
-                input.value = id;
-                input.addEventListener('input', this._submit.bind(this)); // Update on input
-                this._modelInputsContainer.appendChild(input);
+            // Update the values of existing inputs
+            ids.forEach((id, index) => {
+                this._modelInputsContainer.children[index].value = id;
             });
         }
 
