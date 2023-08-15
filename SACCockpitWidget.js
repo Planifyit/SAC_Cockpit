@@ -72,9 +72,9 @@
         
 onCustomWidgetAfterUpdate(changedProperties) {
 
-   if ("model" in changedProperties) {
-        // Update the model property in your widget
-        this._model = changedProperties["model"];
+  if ("modelId" in changedProperties) {
+        this._modelId = changedProperties["modelId"];
+        // Handle the model ID as needed
     }
     
     }     
