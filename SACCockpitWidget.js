@@ -72,9 +72,24 @@
         
 onCustomWidgetAfterUpdate(changedProperties) {
 
+   if ("model" in changedProperties) {
+        // Update the model property in your widget
+        this._model = changedProperties["model"];
+    }
     
     }     
-      
+
+connectedCallback() {
+
+      this.addEventListener('propertiesChanged', (event) => {
+
+        this._model = event.detail.properties.model;
+
+    });
+    
+    }
+        
+        
 _manageVersions() {
             // Logic for managing versions
             let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'manageVersions' } });
