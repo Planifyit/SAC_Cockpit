@@ -33,7 +33,7 @@
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
             
             this._modelInputsContainer = this._shadowRoot.querySelector('.model-inputs');
-            this._shadowRoot.getElementById("addLine").addEventListener("click", this._addLine.bind(this));
+            this._shadowRoot.getElementById("addLine").addEventListener("click", () => this._addLine());
             this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
         }
 
@@ -50,10 +50,11 @@
             input.value = value;
             input.addEventListener('input', this._submit.bind(this)); // Update on input
             this._modelInputsContainer.appendChild(input);
+            this._modelInputsContainer.appendChild(document.createElement('br')); // Add a line break
         }
 
         _submit(e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
             this.dispatchEvent(new CustomEvent("propertiesChanged", {
                 detail: {
                     properties: {
