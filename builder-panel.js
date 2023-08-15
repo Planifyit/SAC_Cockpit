@@ -1,6 +1,22 @@
 (function() {
     let tmpl = document.createElement('template');
     tmpl.innerHTML = `
+
+    	<form id="form">
+    <fieldset>
+        <legend>Properties</legend>
+        <table>
+           <tr>
+        <td>Model ID</td>
+        <td><input id="builder_model_id" type="text"></td>
+    </tr>
+            
+        </table>
+        <input type="submit" style="display:none;">
+    </fieldset>
+</form>
+
+
         <style>
      
             .panel-content {
