@@ -27,6 +27,20 @@
             this._modelInput.addEventListener('input', this._onModelInputChange.bind(this));
         }
 
+_submit(e) {
+    e.preventDefault();
+    this.dispatchEvent(new CustomEvent("propertiesChanged", {
+        detail: {
+            properties: {
+                decimalPlaces: this.decimalPlaces,
+                dimension: this.dimension,
+                measure: this.measure,
+                modelId: this.modelId
+            }
+        }
+    }));
+}
+        
         _onModelInputChange(event) {
             // Dispatch a custom event or handle the model input change
             let modelChangeEvent = new CustomEvent('modelChange', { detail: { model: this._modelInput.value } });
