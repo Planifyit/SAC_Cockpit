@@ -37,6 +37,12 @@
             this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
         }
 
+        connectedCallback() {
+            if (this.modelIds && this.modelIds.length) {
+                this.modelIds.forEach(id => this._addLine(id));
+            }
+        }
+
         _addLine(value = '') {
             let input = document.createElement('input');
             input.type = 'text';
@@ -58,15 +64,11 @@
         }
 
         set modelIds(ids) {
-            // If there are more IDs than inputs, add the necessary inputs
-            while (this._modelInputsContainer.children.length < ids.length) {
-                this._addLine();
-            }
+            // Clear existing inputs
+            this._modelInputsContainer.innerHTML = '';
 
-            // Update the values of existing inputs
-            ids.forEach((id, index) => {
-                this._modelInputsContainer.children[index].value = id;
-            });
+            // Create and populate new inputs
+            ids.forEach(id => this._addLine(id));
         }
 
         get modelIds() {
