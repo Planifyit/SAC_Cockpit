@@ -30,9 +30,8 @@
             super();
             this._shadowRoot = this.attachShadow({ mode: 'open' });
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
-
-            this._modelInput = this._shadowRoot.getElementById('builder_model_id');
-            this._modelInput.addEventListener('input', this._onModelInputChange.bind(this));
+    this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
+  
         }
 
         _submit(e) {
@@ -46,18 +45,12 @@
             }));
         }
 
-        _onModelInputChange(event) {
-            // Dispatch a custom event or handle the model input change
-            let modelChangeEvent = new CustomEvent('modelChange', { detail: { model: this._modelInput.value } });
-            this.dispatchEvent(modelChangeEvent);
-        }
-
         set modelId(newModelId) {
-            this._modelInput.value = newModelId;
+                	this._shadowRoot.getElementById("builder_model_id").value = newModelId;
         }
 
         get modelId() {
-            return this._modelInput.value;
+            return this._shadowRoot.getElementById("builder_model_id").value;
         }
     }
 
