@@ -55,13 +55,16 @@
 
         _submit(e) {
             if (e) e.preventDefault();
-            this.dispatchEvent(new CustomEvent("propertiesChanged", {
-                detail: {
-                    properties: {
-                        modelIds: this.modelIds
-                    }
-                }
-            }));
+this.dispatchEvent(new CustomEvent("propertiesChanged", {
+    detail: {
+        properties: {
+            modelIds: this.modelIds
+        }
+    },
+    bubbles: true,
+    composed: true
+}));
+
         }
 
         set modelIds(ids) {
