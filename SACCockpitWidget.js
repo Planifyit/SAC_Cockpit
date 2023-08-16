@@ -91,14 +91,12 @@ connectedCallback() {
         
         
 _manageVersions() {
-     try {
-        window.Button_1.setVisible(false);
-    } catch (error) {
-        console.error("Failed to execute SAC-specific code:", error);
-    }
+ 
             // Logic for managing versions
             let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'manageVersions' } });
             this.dispatchEvent(actionEvent);
+    
+   
         }
 
         _refreshData() {
