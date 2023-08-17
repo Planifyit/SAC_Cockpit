@@ -91,58 +91,25 @@
 
    
   class SACCockpit extends HTMLElement {
-        constructor() {
-            super();
-            this._shadowRoot = this.attachShadow({ mode: 'open' });
-            this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
+       constructor() {
+    super();
+    this._shadowRoot = this.attachShadow({ mode: 'open' });
+    this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
 
-            this._props = {}; // properties 
+    this._props = {}; // properties 
 
-            this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
-            this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
+    this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
+    this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
-            this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
-                closeButton.addEventListener("click", () => {
-                    const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
-                    const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
-                    privateModal.style.display = "none";
-                    publicModal.style.display = "none";
-                });
-            });
-/*
-let isDragging = false;
-let offsetX, offsetY;
-let currentModal = null; // Store the modal being dragged
-
-// Get all modal-content elements
-const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
-
-// Loop through each modal-content and attach the drag functionality
-modalContents.forEach(modalContent => {
-    modalContent.addEventListener("mousedown", (e) => {
-        isDragging = true;
-        currentModal = modalContent; // Set the current modal being dragged
-        offsetX = e.clientX - modalContent.getBoundingClientRect().left;
-        offsetY = e.clientY - modalContent.getBoundingClientRect().top;
+    this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
+        closeButton.addEventListener("click", () => {
+            const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
+            const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
+            privateModal.style.display = "none";
+            publicModal.style.display = "none";
+        });
     });
-});
-
-document.addEventListener("mousemove", (e) => {
-    if (isDragging && currentModal) {
-        currentModal.style.left = (e.clientX - offsetX) + "px";
-        currentModal.style.top = (e.clientY - offsetY) + "px";
-    }
-});
-
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-    currentModal = null; // Reset the current modal
-});*/
-
-
-
-            
-        }
+}
 
         onCustomWidgetBeforeUpdate(changedProperties) {
             this._props = { ...this._props, ...changedProperties };
