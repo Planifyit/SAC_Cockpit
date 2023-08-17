@@ -40,20 +40,36 @@
                 cursor: pointer;
             }
 
-            #versionsTable {
+            #privateversionsTable {
                 width: 100%;
                 border-collapse: collapse;
             }
 
-            #versionsTable th, #versionsTable td {
+            #privateversionsTable th, #privateversionsTable td {
                 border: 1px solid #FFEB3B; /* Yellow border for table cells */
                 padding: 8px 12px;
             }
 
-            #versionsTable th {
+            #privateversionsTable th {
                 background-color: #3F51B5; /* Dark blue header */
                 color: white;
             }
+
+             #publicversionsTable {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            #publicversionsTable th, #publicversionsTable td {
+                border: 1px solid #FFEB3B; /* Yellow border for table cells */
+                padding: 8px 12px;
+            }
+
+            #publicversionsTable th {
+                background-color: #3F51B5; /* Dark blue header */
+                color: white;
+            }
+
 
             .cockpit {
                 display: flex;
