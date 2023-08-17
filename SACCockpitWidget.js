@@ -264,16 +264,25 @@
                     const tableBody = this._shadowRoot.querySelector("#publicVersionsTable tbody");
                     tableBody.innerHTML = ""; // Clear previous data
 
-                 const version = data; // As the provided JSON structure is not an array
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${version.id}</td>
-                <td>${version.isPublic}</td>
-                <td>${version.isInPublicEditMode}</td>
-                <td>${version.category}</td>
-                <td>${version.description}</td>
-            `;
-            tableBody.appendChild(row);
+                data.publicVersions.forEach(version => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+        <td>${version.id}</td>
+        <td>${version.owner}</td>
+        <td>${version.versionId}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId}</td>
+        <td>${version.creationTime}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.changes}</td>
+        <td>${version.isStorageInternal}</td>
+        <td>${version.workflowState}</td>
+    `;
+                tableBody.appendChild(row);
+            });
+
 
             // Show the public versions modal
             const modal = this._shadowRoot.querySelector("#publicVersionsModal");
