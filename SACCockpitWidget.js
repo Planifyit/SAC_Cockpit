@@ -149,6 +149,26 @@
     transform: scale(0.98); /* Slight scale down on active */
 }
 
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid #eaeaea; /* Lighter border */
+    transition: background 0.3s; /* Smooth transition */
+}
+
+tbody tr:hover {
+    background-color: #f5f5f5; /* Light gray on hover */
+}
+
+th {
+    background-color: #f0f0f0; /* Light gray header */
+}
+
         </style>
         <div class="cockpit">
             <div class="image-container"></div> 
