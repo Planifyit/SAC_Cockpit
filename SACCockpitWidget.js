@@ -42,17 +42,17 @@
     cursor: pointer;
 }
 
-#versionsTable {
+#privateVersionsTable {
     width: 100%;
     border-collapse: collapse;
 }
 
-#versionsTable th, #versionsTable td {
+#privateVersionsTable th, #privateVersionsTable td {
     border: 1px solid #FFEB3B; /* Yellow border for table cells */
     padding: 8px 12px;
 }
 
-#versionsTable th {
+#privateVersionsTable th {
     background-color: #3F51B5; /* Dark blue header */
     color: white;
 }
@@ -160,10 +160,10 @@
                    
         
         this._props = {}; // properties 
-         this._shadowRoot.querySelector('#manageVersions').addEventListener('click', this._manageVersions.bind(this));
+         this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
             this._shadowRoot.querySelector('#refreshData').addEventListener('click', this._refreshData.bind(this));
        this._shadowRoot.querySelector(".close").addEventListener("click", () => {
-    const modal = this._shadowRoot.querySelector("#versionsModal");
+    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
     modal.style.display = "none";
 });
         
@@ -232,12 +232,12 @@ connectedCallback() {
     }
         
         
-_manageVersions() {
+_managePrivateVersions() {
 
     fetch(this.concatenatedUrl)
         .then(response => response.json())
         .then(data => {
-            const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
+            const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
             tableBody.innerHTML = ""; // Clear previous data
 
             data.foreignVersions.forEach(version => {
@@ -260,7 +260,7 @@ _manageVersions() {
             });
 
             // Show the modal
-            const modal = this._shadowRoot.querySelector("#versionsModal");
+            const modal = this._shadowRoot.querySelector("#privateVersionsModal");
             modal.style.display = "block";
         });
 }
