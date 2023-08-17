@@ -169,23 +169,16 @@
                     <thead>
                         <tr>
                           <th>ID</th>
-            <th>Is Public</th>
+           
             <th>Is In Public Edit Mode</th>
-            <th>Is Shared</th>
-            <th>Owner</th>
-            <th>Category</th>
+             <th>Category</th>
             <th>Description</th>
             <th>Source Version ID</th>
-            <th>Creation Time</th>
-            <th>Copying Supported</th>
             <th>Planning Supported</th>
-       
-            <th>Currency Conversion Setting</th>
             <th>Has Planning Area</th>
             <th>Workflow State</th>
             <th>Is Suspended For Input Schedule</th>
-            <th>Is Writeback Enabled</th>
-                        </tr>
+                                  </tr>
                     </thead>
                     <tbody>
                     </tbody>
@@ -318,22 +311,16 @@ _managePublicVersions() {
             publicVersions.forEach(version => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-           <td>${version.id}</td>
-        <td>${version.isPublic}</td>
+        <td>${version.id}</td>
         <td>${version.isInPublicEditMode}</td>
-        <td>${version.isShared}</td>
-        <td>${version.owner || 'N/A'}</td>
         <td>${version.category}</td>
         <td>${version.description}</td>
         <td>${version.sourceVersionId || 'N/A'}</td>
-        <td>${version.creationTime || 'N/A'}</td>
-        <td>${version.operations.copying.isSupported}</td>
-        <td>${version.operations.planning.isSupported}</td>
+       <td>${version.operations.planning.isSupported}</td>
         <td>${version.currencyConversionSetting || 'N/A'}</td>
         <td>${version.hasPlanningArea}</td>
         <td>${version.workflowState}</td>
-        <td>${version.isSuspendedForInputSchedule}</td>
-        <td>${version.isWritebackEnabled}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>     
                 `;
                 tableBody.appendChild(row);
             });
