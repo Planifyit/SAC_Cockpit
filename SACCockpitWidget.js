@@ -60,13 +60,14 @@
 /* Close button styling for both modals */
 #publicVersionsModal .close, #privateVersionsModal .close {
     position: absolute; /* Absolute positioning */
-    top: 10px; /* 10px from the top */
-    right: 10px; /* 10px from the right */
+    top: 5px; /* Adjusted from 10px to 5px */
+    right: 5px; /* Adjusted from 10px to 5px */
     background-color: transparent; /* No background color */
     color: #FF5722; /* Reddish color for close button */
     border: none; /* Remove any default borders */
     cursor: pointer; /* Hand cursor on hover */
 }
+
 
 /* Table styling for both modals */
 #publicVersionsModal table, #privateVersionsModal table {
