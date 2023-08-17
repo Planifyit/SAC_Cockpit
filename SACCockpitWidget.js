@@ -18,8 +18,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0); /* No background color */
-    z-index: 1000; /* Ensure it's on top of other elements */
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent backdrop */
+    z-index: 1000;
 }
 
 /* Adjust the modal content */
@@ -28,12 +28,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #4CAF50; /* Green background */
+    background-color: #ffffff; /* White background */
     padding: 20px;
-    border-radius: 5px;
-    border: 2px solid #FFC107; /* Golden border */
-    cursor: move; /* Indicate the modal is draggable */
-    z-index: 1001; /* Ensure it's on top of the modal container */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+    z-index: 1001;
+    max-width: 80%; /* Limit width */
+    overflow: auto; /* Scroll if content is too much */
 }
 
 
@@ -47,6 +48,17 @@
     background-color: transparent; /* No background color */
 }
 
+.close {
+    color: #FF5722;
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s; /* Smooth transition */
+}
+
+.close:hover {
+    color: #e4412d; /* Darker shade on hover */
+}
 
 /* Modal styling for both public and private modals */
 #publicVersionsModal, #privateVersionsModal {
@@ -95,37 +107,48 @@
 
 
 
+.cockpit {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+          .follow-link {
+    font-size: 10px;
+    transition: color 0.3s; /* Smooth transition */
+}
 
-            .cockpit {
-                display: flex;
-                flex-direction: column;
-                width: 300px;
-                background-color: #f0f0f0;
-                border-radius: 4px;
-                padding: 10px;
-            }
+.follow-link:hover {
+    color: #007BFF; /* Blue color on hover */
+}
 
-            .follow-link {
-                font-size: 10px;
-            }
 
-            .buttons {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-gap: 5px;
-            }
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+}
 
-            .buttons > button {
-                height: 30px;
-                border: none;
-                color: #fff;
-                border-radius: 4px;
-                background-color: #007BFF;
-            }
+.buttons > button {
+    height: 30px;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #007BFF, #0096FF); /* Gradient background */
+    transition: transform 0.3s, background 0.3s; /* Smooth transition */
+}
 
-            .buttons > button:active {
-                transform: scale(0.95);
-            }
+      .buttons > button:hover {
+    background: linear-gradient(90deg, #0062cc, #007BFF); /* Darker gradient on hover */
+}
+
+.buttons > button:active {
+    transform: scale(0.98); /* Slight scale down on active */
+}
+
         </style>
         <div class="cockpit">
             <div class="image-container"></div> 
