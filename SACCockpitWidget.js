@@ -71,35 +71,36 @@
 
         
 onCustomWidgetAfterUpdate(changedProperties) {
-let alertMessage = "";
-   if ("modelId" in changedProperties) {
+    let alertMessage = "";
+
+    if ("modelId" in changedProperties) {
         let updatedModelId = changedProperties["modelId"];
-   alertMessage += `Model ID: ${updatedModelId}\n`; // Adding a newline for clarity
-  
+        alertMessage += `Model ID: ${updatedModelId}\n`; // Adding a newline for clarity
     }
 
-    
- if ("tenantUrl" in changedProperties) {
-        let updatedtenantUrl = changedProperties["tenantUrl"];
-        alertMessage += `Tenant URL: ${updatedTenantUrl}\n`;
+    if ("tenantUrl" in changedProperties) {
+        let updatedtenantUrl = changedProperties["tenantUrl"]; // This is the correct variable name
+        alertMessage += `Tenant URL: ${updatedtenantUrl}\n`; // Use the correct variable name here
     }
 
     if ("apiString" in changedProperties) {
         let updatedApiString = changedProperties["apiString"];
-     alertMessage += `Tenant URL: ${updatedTenantUrl}\n`;
+        alertMessage += `API String: ${updatedApiString}\n`; // Corrected the label here
     }
 
     if ("privateVersionLocation" in changedProperties) {
         let updatedPrivateVersionLocation = changedProperties["privateVersionLocation"];
-      alertMessage += `Private Version Location: ${updatedPrivateVersionLocation}\n`;
-  
+        alertMessage += `Private Version Location: ${updatedPrivateVersionLocation}\n`;
     }
 
-  if (alertMessage) {
+    if (alertMessage) {
         window.alert(alertMessage);
     }
-  
-    }     
+}
+
+
+
+
 
 connectedCallback() {
 
