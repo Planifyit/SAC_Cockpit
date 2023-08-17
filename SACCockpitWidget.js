@@ -47,55 +47,6 @@
     color: #e4412d;
 }
 
-
-
-/* Modal styling for both public and private modals */
-#publicVersionsModal, #privateVersionsModal {
-    background-color: transparent; /* No background color */
-    padding: 0; /* Remove padding */
-    border: none; /* Remove border */
-    position: relative; /* To position the close button absolutely within the modal */
-}
-
-
-/* Close button styling for both modals */
-#publicVersionsModal .close, #privateVersionsModal .close {
-    position: absolute; /* Absolute positioning */
-    top: 5px; /* Adjusted from 10px to 5px */
-    right: 5px; /* Adjusted from 10px to 5px */
-    background-color: transparent; /* No background color */
-    color: #FF5722; /* Reddish color for close button */
-    border: none; /* Remove any default borders */
-    cursor: pointer; /* Hand cursor on hover */
-}
-
-
-/* Table styling for both modals */
-#publicVersionsModal table, #privateVersionsModal table {
-    width: 100%; /* Full width of the modal */
-    border-collapse: collapse; /* Collapse borders */
-}
-
-/* Table header styling for both modals */
-#publicVersionsModal th, #privateVersionsModal th {
-    background-color: #ddd; /* Light gray background */
-    border-bottom: 2px solid black; /* Black bottom border */
-}
-
-/* Table cell styling for both modals */
-#publicVersionsModal td, #publicVersionsModal th, #privateVersionsModal td, #privateVersionsModal th {
-    padding: 10px; /* Some padding for spacing */
-    border-right: 1px solid black; /* Right border for each cell */
-}
-
-/* Remove right border for the last cell in both modals */
-#publicVersionsModal td:last-child, #publicVersionsModal th:last-child, #privateVersionsModal td:last-child, #privateVersionsModal th:last-child {
-    border-right: none;
-}
-
-
-
-
 .cockpit {
     display: flex;
     flex-direction: column;
@@ -160,7 +111,7 @@
     transform: translateY(0);
 }
 
-
+/* General table styling */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -168,7 +119,6 @@ table {
 
 th, td {
     padding: 10px;
-    border-bottom: 1px solid #eaeaea;
     transition: background 0.3s;
 }
 
@@ -183,6 +133,20 @@ tbody tr:hover {
 th {
     background-color: #f0f0f0;
 }
+
+/* Specific styling for tables inside the modals */
+#publicVersionsModal th, #privateVersionsModal th {
+    border-bottom: 2px solid black; /* Black bottom border */
+}
+
+#publicVersionsModal td, #publicVersionsModal th, #privateVersionsModal td, #privateVersionsModal th {
+    border-right: 1px solid black; /* Right border for each cell */
+}
+
+#publicVersionsModal td:last-child, #publicVersionsModal th:last-child, #privateVersionsModal td:last-child, #privateVersionsModal th:last-child {
+    border-right: none;
+}
+
 
         </style>
         <div class="cockpit">
