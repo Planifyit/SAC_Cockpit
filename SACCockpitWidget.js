@@ -150,99 +150,84 @@
 
     `;
    
- 
-    class SACCockpit  extends HTMLElement {
-    constructor() {
-        super();
-        this._shadowRoot = this.attachShadow({mode: 'open'});
-        this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
+  class SACCockpit extends HTMLElement {
+        constructor() {
+            super();
+            this._shadowRoot = this.attachShadow({ mode: 'open' });
+            this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
 
-                   
-        
-        this._props = {}; // properties 
-         this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
-            this._shadowRoot.querySelector('#refreshData').addEventListener('click', this._refreshData.bind(this));
-       this._shadowRoot.querySelector(".close").addEventListener("click", () => {
-    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
-    modal.style.display = "none";
-});
-        
+            this._props = {}; // properties 
 
+            this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
+            this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
-        
-let isDragging = false;
-let offsetX, offsetY;
+            this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
+                closeButton.addEventListener("click", () => {
+                    const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
+                    const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
+                    privateModal.style.display = "none";
+                    publicModal.style.display = "none";
+                });
+            });
 
-this._shadowRoot.querySelector(".modal-content").addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - e.currentTarget.getBoundingClientRect().left;
-    offsetY = e.clientY - e.currentTarget.getBoundingClientRect().top;
-});
+            let isDragging = false;
+            let offsetX, offsetY;
 
-document.addEventListener("mousemove", (e) => {
-    if (isDragging) {
-        const modalContent = this._shadowRoot.querySelector(".modal-content");
-        modalContent.style.left = (e.clientX - offsetX) + "px";
-        modalContent.style.top = (e.clientY - offsetY) + "px";
-    }
-});
+            this._shadowRoot.querySelector(".modal-content").addEventListener("mousedown", (e) => {
+                isDragging = true;
+                offsetX = e.clientX - e.currentTarget.getBoundingClientRect().left;
+                offsetY = e.clientY - e.currentTarget.getBoundingClientRect().top;
+            });
 
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-});
+            document.addEventListener("mousemove", (e) => {
+                if (isDragging) {
+                    const modalContent = this._shadowRoot.querySelector(".modal-content");
+                    modalContent.style.left = (e.clientX - offsetX) + "px";
+                    modalContent.style.top = (e.clientY - offsetY) + "px";
+                }
+            });
 
-    }
+            document.addEventListener("mouseup", () => {
+                isDragging = false;
+            });
+        }
 
- onCustomWidgetBeforeUpdate(changedProperties) {
-        this._props = { ...this._props, ...changedProperties };
-    }
+        onCustomWidgetBeforeUpdate(changedProperties) {
+            this._props = { ...this._props, ...changedProperties };
+        }
 
+        onCustomWidgetAfterUpdate(changedProperties) {
+            let currentModelId = "modelId" in changedProperties ? changedProperties["modelId"] : this.modelId;
+            let currentTenantUrl = "tenantUrl" in changedProperties ? changedProperties["tenantUrl"] : this.tenantUrl;
+            let currentApiString = "apiString" in changedProperties ? changedProperties["apiString"] : this.apiString;
+            let currentPrivateVersionLocation = "privateVersionLocation" in changedProperties ? changedProperties["privateVersionLocation"] : this.privateVersionLocation;
+            let currentPublicVersionLocation = "publicVersionLocation" in changedProperties ? changedProperties["publicVersionLocation"] : this.publicVersionLocation;
 
-        
-onCustomWidgetAfterUpdate(changedProperties) {
- 
+            // Concatenate the values
+            let concatenatedUrlPrivate = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
+            let concatenatedUrlPublic = currentTenantUrl + currentApiString + currentModelId + currentPublicVersionLocation;
 
+            this.concatenatedUrlPrivate = concatenatedUrlPrivate;
+            this.concatenatedUrlPublic = concatenatedUrlPublic;
+        }
 
-    let currentModelId = "modelId" in changedProperties ? changedProperties["modelId"] : this.modelId;
-    let currentTenantUrl = "tenantUrl" in changedProperties ? changedProperties["tenantUrl"] : this.tenantUrl;
-    let currentApiString = "apiString" in changedProperties ? changedProperties["apiString"] : this.apiString;
-    let currentPrivateVersionLocation = "privateVersionLocation" in changedProperties ? changedProperties["privateVersionLocation"] : this.privateVersionLocation;
-
-    // Concatenate the values
-    let concatenatedString = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
-  
-    this.concatenatedUrl = concatenatedString ;
- 
- 
-    
-}
-
-
+        connectedCallback() {
+            this.addEventListener('propertiesChanged', (event) => {
+                this._model = event.detail.properties.model;
+            });
+        }
 
 
+ _managePrivateVersions() {
+            fetch(this.concatenatedUrlPrivate)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
+                    tableBody.innerHTML = ""; // Clear previous data
 
-connectedCallback() {
-
-      this.addEventListener('propertiesChanged', (event) => {
-
-        this._model = event.detail.properties.model;
-
-    });
-    
-    }
-        
-        
-_managePrivateVersions() {
-
-    fetch(this.concatenatedUrl)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
-            tableBody.innerHTML = ""; // Clear previous data
-
-            data.foreignVersions.forEach(version => {
-                const row = document.createElement("tr");
-               row.innerHTML = `
+                    data.foreignVersions.forEach(version => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
         <td>${version.id}</td>
         <td>${version.owner}</td>
         <td>${version.versionId}</td>
@@ -260,16 +245,34 @@ _managePrivateVersions() {
             });
 
             // Show the modal
-            const modal = this._shadowRoot.querySelector("#privateVersionsModal");
+                    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
+                    modal.style.display = "block";
+                });
+        }
+
+    _managePublicVersions() {
+            fetch(this.concatenatedUrlPublic)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = this._shadowRoot.querySelector("#publicVersionsTable tbody");
+                    tableBody.innerHTML = ""; // Clear previous data
+
+                 const version = data; // As the provided JSON structure is not an array
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${version.id}</td>
+                <td>${version.isPublic}</td>
+                <td>${version.isInPublicEditMode}</td>
+                <td>${version.category}</td>
+                <td>${version.description}</td>
+            `;
+            tableBody.appendChild(row);
+
+            // Show the public versions modal
+            const modal = this._shadowRoot.querySelector("#publicVersionsModal");
             modal.style.display = "block";
-        });
-}
-
-
-        _refreshData() {
-            // Logic for refreshing data
-            let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'refreshData' } });
-            this.dispatchEvent(actionEvent);
+                    
+                });
         }
     }
 
