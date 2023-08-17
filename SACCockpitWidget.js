@@ -77,6 +77,13 @@ onCustomWidgetAfterUpdate(changedProperties) {
   
         window.alert(`Model ID: ${updatedModelId}`);
     }
+
+    
+   if ("tenantUrl" in changedProperties) {
+        let updatedtenantUrl = changedProperties["tenantUrl"];
+  
+        window.alert(`tenant Url: ${tenantUrl}`);
+    }
     }     
 
 connectedCallback() {
