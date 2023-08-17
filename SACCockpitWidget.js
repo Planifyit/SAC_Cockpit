@@ -81,9 +81,10 @@ onCustomWidgetAfterUpdate(changedProperties) {
 
     // Concatenate the values
     let concatenatedString = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
-
-    // Display the concatenated string
-    window.alert(concatenatedString);
+  
+    this.concatenatedUrl = concatenatedString ;
+ 
+ 
     
 }
 
@@ -102,10 +103,8 @@ connectedCallback() {
     }
         
         
-_manageVersions() {
-    const url = "https://sac-d-bit.eu10.hcs.cloud.sap/sap/fpa/services/rest/v1/internal/models/Cdlg2a1kkbj139ea3kjvk86s05k/foreign-versions?tenant=7";
-
-    fetch(url)
+manageVersions() {
+    fetch(this.concatenatedUrl)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
