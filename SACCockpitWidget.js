@@ -21,22 +21,40 @@
     background-color: rgba(0,0,0,0.7);
 }
 
+
 .modal-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f4f4f4;
+    background-color: #4CAF50; /* Green background */
     padding: 20px;
     border-radius: 5px;
+    border: 2px solid #FFC107; /* Golden border */
+    cursor: move; /* Indicate the modal is draggable */
 }
 
 .close {
-    color: #aaa;
+    color: #FF5722; /* Reddish color for close button */
     float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+}
+
+#versionsTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#versionsTable th, #versionsTable td {
+    border: 1px solid #FFEB3B; /* Yellow border for table cells */
+    padding: 8px 12px;
+}
+
+#versionsTable th {
+    background-color: #3F51B5; /* Dark blue header */
+    color: white;
 }
 
     
@@ -206,6 +224,29 @@ _manageVersions() {
         }
     }
 
+let isDragging = false;
+let offsetX, offsetY;
+
+this._shadowRoot.querySelector(".modal-content").addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - e.currentTarget.getBoundingClientRect().left;
+    offsetY = e.clientY - e.currentTarget.getBoundingClientRect().top;
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+        const modalContent = this._shadowRoot.querySelector(".modal-content");
+        modalContent.style.left = (e.clientX - offsetX) + "px";
+        modalContent.style.top = (e.clientY - offsetY) + "px";
+    }
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+});
+
+
+    
 customElements.define('sac-cockpit-widget', SACCockpit);
 })();    
   
