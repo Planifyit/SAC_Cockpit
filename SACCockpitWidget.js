@@ -84,6 +84,49 @@
 }
 
 
+/* Modal styling */
+#privateVersionsModal {
+    background-color: green; /* Green background for the modal */
+    padding: 20px; /* Some padding to give it space */
+    border: 5px solid yellow; /* Yellow lining/border */
+    position: relative; /* To position the close button absolutely within the modal */
+}
+
+/* Close button styling */
+#privateVersionsModal .close {
+    position: absolute; /* Absolute positioning */
+    top: 10px; /* 10px from the top */
+    right: 10px; /* 10px from the right */
+    background-color: red; /* Red background */
+    color: white; /* White text color */
+    border: none; /* Remove any default borders */
+    cursor: pointer; /* Hand cursor on hover */
+}
+
+/* Table styling */
+#privateVersionsModal table {
+    width: 100%; /* Full width of the modal */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+/* Table header styling */
+#privateVersionsModal th {
+    background-color: #ddd; /* Light gray background */
+    border-bottom: 2px solid black; /* Black bottom border */
+}
+
+/* Table cell styling */
+#privateVersionsModal td, #privateVersionsModal th {
+    padding: 10px; /* Some padding for spacing */
+    border-right: 1px solid black; /* Right border for each cell */
+}
+
+/* Remove right border for the last cell */
+#privateVersionsModal td:last-child, #privateVersionsModal th:last-child {
+    border-right: none;
+}
+
+
 
 
 
