@@ -82,7 +82,7 @@ onCustomWidgetAfterUpdate(changedProperties) {
    if ("tenantUrl" in changedProperties) {
         let updatedtenantUrl = changedProperties["tenantUrl"];
   
-        window.alert(`tenant Url: ${tenantUrl}`);
+        window.alert(`tenant Url: ${updatedtenantUrl}`);
     }
     }     
 
