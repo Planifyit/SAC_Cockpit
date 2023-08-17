@@ -74,25 +74,31 @@ onCustomWidgetAfterUpdate(changedProperties) {
 
    if ("modelId" in changedProperties) {
         let updatedModelId = changedProperties["modelId"];
+   alertMessage += `Model ID: ${updatedModelId}\n`; // Adding a newline for clarity
   
-        window.alert(`Model ID: ${updatedModelId}`);
     }
 
     
  if ("tenantUrl" in changedProperties) {
         let updatedtenantUrl = changedProperties["tenantUrl"];
-        // Handle the updated tenant URL as needed
+        alertMessage += `Tenant URL: ${updatedTenantUrl}\n`;
     }
 
     if ("apiString" in changedProperties) {
         let updatedApiString = changedProperties["apiString"];
-        // Handle the updated API string as needed
+     alertMessage += `Tenant URL: ${updatedTenantUrl}\n`;
     }
 
     if ("privateVersionLocation" in changedProperties) {
         let updatedPrivateVersionLocation = changedProperties["privateVersionLocation"];
-        // Handle the updated private version location as needed
+      alertMessage += `Private Version Location: ${updatedPrivateVersionLocation}\n`;
+  
     }
+
+  if (alertMessage) {
+        window.alert(alertMessage);
+    }
+  
     }     
 
 connectedCallback() {
