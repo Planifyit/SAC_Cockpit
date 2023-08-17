@@ -71,31 +71,20 @@
 
         
 onCustomWidgetAfterUpdate(changedProperties) {
-    let alertMessage = "";
+ 
 
-    if ("modelId" in changedProperties) {
-        let updatedModelId = changedProperties["modelId"];
-        alertMessage += `Model ID: ${updatedModelId}\n`; // Adding a newline for clarity
-    }
 
-    if ("tenantUrl" in changedProperties) {
-        let updatedtenantUrl = changedProperties["tenantUrl"]; // This is the correct variable name
-        alertMessage += `Tenant URL: ${updatedtenantUrl}\n`; // Use the correct variable name here
-    }
+    let currentModelId = "modelId" in changedProperties ? changedProperties["modelId"] : this.modelId;
+    let currentTenantUrl = "tenantUrl" in changedProperties ? changedProperties["tenantUrl"] : this.tenantUrl;
+    let currentApiString = "apiString" in changedProperties ? changedProperties["apiString"] : this.apiString;
+    let currentPrivateVersionLocation = "privateVersionLocation" in changedProperties ? changedProperties["privateVersionLocation"] : this.privateVersionLocation;
 
-    if ("apiString" in changedProperties) {
-        let updatedApiString = changedProperties["apiString"];
-        alertMessage += `API String: ${updatedApiString}\n`; // Corrected the label here
-    }
+    // Concatenate the values
+    let concatenatedString = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
 
-    if ("privateVersionLocation" in changedProperties) {
-        let updatedPrivateVersionLocation = changedProperties["privateVersionLocation"];
-        alertMessage += `Private Version Location: ${updatedPrivateVersionLocation}\n`;
-    }
-
-    if (alertMessage) {
-        window.alert(alertMessage);
-    }
+    // Display the concatenated string
+    window.alert(concatenatedString);
+    
 }
 
 
