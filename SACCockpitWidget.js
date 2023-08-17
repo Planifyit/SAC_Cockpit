@@ -206,7 +206,7 @@
                     publicModal.style.display = "none";
                 });
             });
-
+/*
 let isDragging = false;
 let offsetX, offsetY;
 let currentModal = null; // Store the modal being dragged
@@ -234,7 +234,7 @@ document.addEventListener("mousemove", (e) => {
 document.addEventListener("mouseup", () => {
     isDragging = false;
     currentModal = null; // Reset the current modal
-});
+});*/
 
 
 
