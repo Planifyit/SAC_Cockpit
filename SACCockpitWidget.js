@@ -10,7 +10,6 @@
     background-size: cover;
     }
 
-/* Adjust the modal container */
 .modal {
     display: none;
     position: fixed;
@@ -18,34 +17,22 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4); /* Semi-transparent backdrop */
+    background-color: rgba(0,0,0,0.4);
     z-index: 1000;
 }
 
-/* Adjust the modal content */
 .modal-content {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     z-index: 1001;
-    max-width: 80%; /* Limit width */
-    overflow: auto; /* Scroll if content is too much */
-}
-
-
-  /* Adjust the close button styling */
-.close {
-    color: #FF5722; /* Reddish color for close button */
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: transparent; /* No background color */
+    max-width: 80%;
+    overflow: auto;
 }
 
 .close {
@@ -53,12 +40,14 @@
     float: right;
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.3s; /* Smooth transition */
+    transition: color 0.3s;
 }
 
 .close:hover {
-    color: #e4412d; /* Darker shade on hover */
+    color: #e4412d;
 }
+
+
 
 /* Modal styling for both public and private modals */
 #publicVersionsModal, #privateVersionsModal {
@@ -112,19 +101,39 @@
     flex-direction: column;
     width: 300px;
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
-          .follow-link {
+
+.follow-link {
     font-size: 10px;
-    transition: color 0.3s; /* Smooth transition */
+    transition: color 0.3s;
+    text-decoration: none; /* Remove default underline */
+    position: relative;
 }
 
 .follow-link:hover {
-    color: #007BFF; /* Blue color on hover */
+    color: #007BFF;
 }
 
+.follow-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #007BFF; /* Blue underline */
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s;
+}
+
+.follow-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
 
 .buttons {
     display: grid;
@@ -136,20 +145,22 @@
     height: 30px;
     border: none;
     color: #fff;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #007BFF, #0096FF); /* Gradient background */
-    transition: transform 0.3s, background 0.3s; /* Smooth transition */
+    border-radius: 15px;
+    background: linear-gradient(45deg, #FF5370, #FF869A); /* Pink gradient */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-      .buttons > button:hover {
-    background: linear-gradient(90deg, #0062cc, #007BFF); /* Darker gradient on hover */
+.buttons > button:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
 }
 
 .buttons > button:active {
-    transform: scale(0.98); /* Slight scale down on active */
+    transform: translateY(0);
 }
 
-/* Table styling */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -157,16 +168,20 @@ table {
 
 th, td {
     padding: 10px;
-    border-bottom: 1px solid #eaeaea; /* Lighter border */
-    transition: background 0.3s; /* Smooth transition */
+    border-bottom: 1px solid #eaeaea;
+    transition: background 0.3s;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f7f7f7; /* Alternating row colors */
 }
 
 tbody tr:hover {
-    background-color: #f5f5f5; /* Light gray on hover */
+    background-color: #eaeaea;
 }
 
 th {
-    background-color: #f0f0f0; /* Light gray header */
+    background-color: #f0f0f0;
 }
 
         </style>
