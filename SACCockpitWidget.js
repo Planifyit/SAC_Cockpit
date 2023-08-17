@@ -10,27 +10,31 @@
     background-size: cover;
     }
 
+/* Adjust the modal container */
 .modal {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0,0,0,0.7);
-            }
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0); /* No background color */
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
 
-            .modal-content {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: #4CAF50; /* Green background */
-                padding: 20px;
-                border-radius: 5px;
-                border: 2px solid #FFC107; /* Golden border */
-                cursor: move; /* Indicate the modal is draggable */
-            }
+/* Adjust the modal content */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50; /* Green background */
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #FFC107; /* Golden border */
+    cursor: move; /* Indicate the modal is draggable */
+    z-index: 1001; /* Ensure it's on top of the modal container */
+}
 
             .close {
                 color: #FF5722; /* Reddish color for close button */
