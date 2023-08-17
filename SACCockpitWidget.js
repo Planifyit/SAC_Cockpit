@@ -10,55 +10,52 @@
     background-size: cover;
     }
 
+.modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.7);
+            }
 
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.7);
-}
+            .modal-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #4CAF50; /* Green background */
+                padding: 20px;
+                border-radius: 5px;
+                border: 2px solid #FFC107; /* Golden border */
+                cursor: move; /* Indicate the modal is draggable */
+            }
 
+            .close {
+                color: #FF5722; /* Reddish color for close button */
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                cursor: pointer;
+            }
 
-.modal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #4CAF50; /* Green background */
-    padding: 20px;
-    border-radius: 5px;
-    border: 2px solid #FFC107; /* Golden border */
-    cursor: move; /* Indicate the modal is draggable */
-}
+            #versionsTable {
+                width: 100%;
+                border-collapse: collapse;
+            }
 
-.close {
-    color: #FF5722; /* Reddish color for close button */
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
+            #versionsTable th, #versionsTable td {
+                border: 1px solid #FFEB3B; /* Yellow border for table cells */
+                padding: 8px 12px;
+            }
 
-#privateVersionsTable {
-    width: 100%;
-    border-collapse: collapse;
-}
+            #versionsTable th {
+                background-color: #3F51B5; /* Dark blue header */
+                color: white;
+            }
 
-#privateVersionsTable th, #privateVersionsTable td {
-    border: 1px solid #FFEB3B; /* Yellow border for table cells */
-    padding: 8px 12px;
-}
-
-#privateVersionsTable th {
-    background-color: #3F51B5; /* Dark blue header */
-    color: white;
-}
-
-    
-             .cockpit {
+            .cockpit {
                 display: flex;
                 flex-direction: column;
                 width: 300px;
@@ -66,14 +63,17 @@
                 border-radius: 4px;
                 padding: 10px;
             }
+
             .follow-link {
                 font-size: 10px;
             }
+
             .buttons {
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
                 grid-gap: 5px;
             }
+
             .buttons > button {
                 height: 30px;
                 border: none;
@@ -81,73 +81,64 @@
                 border-radius: 4px;
                 background-color: #007BFF;
             }
+
             .buttons > button:active {
                 transform: scale(0.95);
             }
         </style>
-        
-             <div class="cockpit">
+        <div class="cockpit">
             <div class="image-container"></div> 
             <div class="buttons">
- <button id="managePrivateVersions">Manage Private Versions</button>
-<button id="managePublicVersions">Manage Public Versions</button>
-
-           
+                <button id="managePrivateVersions">Manage Private Versions</button>
+                <button id="managePublicVersions">Manage Public Versions</button>
             </div>
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
         </div>
 
-<div id="privateVersionsModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <table id="privateVersionsTable">
-<thead>
-    <tr>
-        <th>ID</th>
-        <th>Owner</th>
-        <th>Version ID</th>
-        <th>Is In Public Edit Mode</th>
-        <th>Category</th>
-        <th>Description</th>
-        <th>Source Version ID</th>
-        <th>Creation Time</th>
-        <th>Is Suspended For Input Schedule</th>
-        <th>Changes</th>
-        <th>Is Storage Internal</th>
-        <th>Workflow State</th>
-    </tr>
-</thead>
-<tbody>
-       
-    </tbody>
+        <div id="privateVersionsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <table id="privateVersionsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Owner</th>
+                            <th>Version ID</th>
+                            <th>Is In Public Edit Mode</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Source Version ID</th>
+                            <th>Creation Time</th>
+                            <th>Is Suspended For Input Schedule</th>
+                            <th>Changes</th>
+                            <th>Is Storage Internal</th>
+                            <th>Workflow State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-        </table>
-    </div>
-</div>
-
-
-<div id="publicVersionsModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <table id="publicVersionsTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Is Public</th>
-                    <th>Is In Public Edit Mode</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <!-- Add other headers as needed -->
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-
-
+        <div id="publicVersionsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <table id="publicVersionsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Is Public</th>
+                            <th>Is In Public Edit Mode</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     `;
    
   class SACCockpit extends HTMLElement {
