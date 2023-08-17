@@ -264,7 +264,7 @@
                     const tableBody = this._shadowRoot.querySelector("#publicVersionsTable tbody");
                     tableBody.innerHTML = ""; // Clear previous data
 
-                data.publicVersions.forEach(version => {
+                data.versions.forEach(version => {
                         const row = document.createElement("tr");
                         row.innerHTML = `
         <td>${version.id}</td>
