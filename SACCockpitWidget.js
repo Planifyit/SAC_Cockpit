@@ -37,13 +37,15 @@
 }
 
 
-            .close {
-                color: #FF5722; /* Reddish color for close button */
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-                cursor: pointer;
-            }
+  /* Adjust the close button styling */
+.close {
+    color: #FF5722; /* Reddish color for close button */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent; /* No background color */
+}
 
 
 /* Modal styling for both public and private modals */
@@ -54,13 +56,14 @@
     position: relative; /* To position the close button absolutely within the modal */
 }
 
+
 /* Close button styling for both modals */
 #publicVersionsModal .close, #privateVersionsModal .close {
     position: absolute; /* Absolute positioning */
     top: 10px; /* 10px from the top */
     right: 10px; /* 10px from the right */
-    background-color: red; /* Red background */
-    color: white; /* White text color */
+    background-color: transparent; /* No background color */
+    color: #FF5722; /* Reddish color for close button */
     border: none; /* Remove any default borders */
     cursor: pointer; /* Hand cursor on hover */
 }
