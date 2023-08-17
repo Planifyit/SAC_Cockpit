@@ -238,28 +238,7 @@ document.addEventListener("mousemove", (e) => {
     }
 });
 
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-});
 
-            const modals = this._shadowRoot.querySelectorAll(".modal");
-
-modals.forEach(modal => {
-    modal.addEventListener("click", (e) => {
-        // Check if the clicked element is the modal itself and not a child
-        if (e.target === modal) {
-            modal.style.display = "none";
-        }
-    });
-});
-
-const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
-
-modalContents.forEach(content => {
-    content.addEventListener("click", (e) => {
-        e.stopPropagation();
-    });
-});
 
             
         }
