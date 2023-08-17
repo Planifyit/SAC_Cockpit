@@ -103,7 +103,7 @@ connectedCallback() {
     }
         
         
-manageVersions() {
+_manageVersions() {
     fetch(this.concatenatedUrl)
         .then(response => {
             if (!response.ok) {
