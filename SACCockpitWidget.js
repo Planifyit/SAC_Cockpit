@@ -141,7 +141,30 @@
     modal.style.display = "none";
 });
         
+
+
         
+let isDragging = false;
+let offsetX, offsetY;
+
+this._shadowRoot.querySelector(".modal-content").addEventListener("mousedown", (e) => {
+    isDragging = true;
+    offsetX = e.clientX - e.currentTarget.getBoundingClientRect().left;
+    offsetY = e.clientY - e.currentTarget.getBoundingClientRect().top;
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (isDragging) {
+        const modalContent = this._shadowRoot.querySelector(".modal-content");
+        modalContent.style.left = (e.clientX - offsetX) + "px";
+        modalContent.style.top = (e.clientY - offsetY) + "px";
+    }
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+});
+
     }
 
  onCustomWidgetBeforeUpdate(changedProperties) {
@@ -223,27 +246,6 @@ _manageVersions() {
             this.dispatchEvent(actionEvent);
         }
     }
-
-let isDragging = false;
-let offsetX, offsetY;
-
-this._shadowRoot.querySelector(".modal-content").addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - e.currentTarget.getBoundingClientRect().left;
-    offsetY = e.clientY - e.currentTarget.getBoundingClientRect().top;
-});
-
-document.addEventListener("mousemove", (e) => {
-    if (isDragging) {
-        const modalContent = this._shadowRoot.querySelector(".modal-content");
-        modalContent.style.left = (e.clientX - offsetX) + "px";
-        modalContent.style.top = (e.clientY - offsetY) + "px";
-    }
-});
-
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-});
 
 
     
