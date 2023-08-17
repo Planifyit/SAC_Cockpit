@@ -116,6 +116,9 @@
         <th>Workflow State</th>
     </tr>
 </thead>
+<tbody>
+       
+    </tbody>
 
         </table>
     </div>
@@ -159,11 +162,16 @@
      this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
 this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
-       this._shadowRoot.querySelector(".close").addEventListener("click", () => {
-    const modal = this._shadowRoot.querySelector("#versionsModal");
-    modal.style.display = "none";
+
+        this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
+    closeButton.addEventListener("click", () => {
+        const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
+        const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
+        privateModal.style.display = "none";
+        publicModal.style.display = "none";
+    });
 });
-        
+
 
 
         
