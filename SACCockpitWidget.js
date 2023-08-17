@@ -10,6 +10,7 @@
     background-size: cover;
     }
 
+/* Adjust the modal container */
 .modal {
     display: none;
     position: fixed;
@@ -17,34 +18,38 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent backdrop */
     z-index: 1000;
 }
 
+/* Adjust the modal content */
 .modal-content {
     position: absolute;
-    top: 50%;
+    top: calc(100% + 10px); /* Position it just below the cockpit div */
     left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #ffffff;
+    transform: translateX(-50%);
+    background-color: #ffffff; /* White background */
     padding: 20px;
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-radius: 20px; /* More rounded corners */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* More pronounced shadow */
     z-index: 1001;
-    max-width: 80%;
-    overflow: auto;
+    max-width: 90%; /* Limit width */
+    overflow: auto; /* Scroll if content is too much */
 }
 
+/* Adjust the close button styling */
 .close {
     color: #FF5722;
     float: right;
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color 0.3s; /* Smooth transition */
+    border: none;
+    background: none;
 }
 
 .close:hover {
-    color: #e4412d;
+    color: #e4412d; /* Darker shade on hover */
 }
 
 .cockpit {
@@ -111,14 +116,16 @@
     transform: translateY(0);
 }
 
-/* General table styling */
+/* Table styling */
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 20px; /* Space between close button and table */
 }
 
 th, td {
     padding: 10px;
+    border-bottom: 1px solid #eaeaea;
     transition: background 0.3s;
 }
 
@@ -132,6 +139,9 @@ tbody tr:hover {
 
 th {
     background-color: #f0f0f0;
+    font-weight: 600; /* Bold headers */
+    text-transform: uppercase; /* Uppercase headers */
+    font-size: 0.9em; /* Slightly smaller font for headers */
 }
 
 /* Specific styling for tables inside the modals */
