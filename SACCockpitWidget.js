@@ -103,7 +103,7 @@ connectedCallback() {
         
         
 _manageVersions() {
- 
+     window.alert(concatenatedString);
             // Logic for managing versions
             let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'manageVersions' } });
             this.dispatchEvent(actionEvent);
