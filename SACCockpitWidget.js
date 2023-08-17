@@ -95,10 +95,10 @@
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
         </div>
 
-        <div id="versionsModal" class="modal">
+<div id="privateVersionsModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <table id="versionsTable">
+        <table id="privateVersionsTable">
 <thead>
     <tr>
         <th>ID</th>
@@ -116,12 +116,33 @@
     </tr>
 </thead>
 
+        </table>
+    </div>
+</div>
+
+
+<div id="publicVersionsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <table id="publicVersionsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Is Public</th>
+                    <th>Is In Public Edit Mode</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <!-- Add other headers as needed -->
+                </tr>
+            </thead>
             <tbody>
-           
             </tbody>
         </table>
     </div>
 </div>
+
+
+
     `;
    
  
@@ -237,41 +258,33 @@ _managePrivateVersions() {
             });
 
             // Show the modal
-            const modal = this._shadowRoot.querySelector("#versionsModal");
-            modal.style.display = "block";
+    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
+    modal.style.display = "block";
         });
 }
 
 
- _managePublicVersions() {
-
+_managePublicVersions() {
     fetch(this.concatenatedUrl_public)
         .then(response => response.json())
         .then(data => {
-            const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
+            const tableBody = this._shadowRoot.querySelector("#publicVersionsTable tbody");
             tableBody.innerHTML = ""; // Clear previous data
 
-            data.foreignVersions.forEach(version => {
-                const row = document.createElement("tr");
-               row.innerHTML = `
-        <td>${version.id}</td>
-        <td>${version.owner}</td>
-        <td>${version.versionId}</td>
-        <td>${version.isInPublicEditMode}</td>
-        <td>${version.category}</td>
-        <td>${version.description}</td>
-        <td>${version.sourceVersionId}</td>
-        <td>${version.creationTime}</td>
-        <td>${version.isSuspendedForInputSchedule}</td>
-        <td>${version.changes}</td>
-        <td>${version.isStorageInternal}</td>
-        <td>${version.workflowState}</td>
-    `;
-                tableBody.appendChild(row);
-            });
+            // Note: Assuming the new JSON structure has an array similar to foreignVersions for public versions. Adjust accordingly if different.
+            const version = data; // As the provided JSON structure is not an array
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${version.id}</td>
+                <td>${version.isPublic}</td>
+                <td>${version.isInPublicEditMode}</td>
+                <td>${version.category}</td>
+                <td>${version.description}</td>
+            `;
+            tableBody.appendChild(row);
 
-            // Show the modal
-            const modal = this._shadowRoot.querySelector("#versionsModal");
+            // Show the public versions modal
+            const modal = this._shadowRoot.querySelector("#publicVersionsModal");
             modal.style.display = "block";
         });
 }
