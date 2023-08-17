@@ -67,6 +67,10 @@
                      "privateVersionLocation": {
         "type": "string",
         "default": "/foreign-versions?tenant=7"
+    },
+                           "publicVersionLocation": {
+        "type": "string",
+        "default": "/versions?tenant=2"
     }
     },
     "methods": {
