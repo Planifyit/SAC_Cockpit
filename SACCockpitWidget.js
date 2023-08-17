@@ -85,20 +85,22 @@
                 transform: scale(0.95);
             }
         </style>
-        <div class="cockpit">
+        
+             <div class="cockpit">
             <div class="image-container"></div> 
             <div class="buttons">
-                <button id="manageVersions">Manage Versions</button>
-                <button id="refreshData">Refresh Data</button>
+ <button id="managePrivateVersions">Manage Private Versions</button>
+<button id="managePublicVersions">Manage Public Versions</button>
+
            
             </div>
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
         </div>
 
-        <div id="versionsModal" class="modal">
+<div id="privateVersionsModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <table id="versionsTable">
+        <table id="privateVersionsTable">
 <thead>
     <tr>
         <th>ID</th>
@@ -115,13 +117,37 @@
         <th>Workflow State</th>
     </tr>
 </thead>
+<tbody>
+       
+    </tbody>
 
+        </table>
+    </div>
+</div>
+
+
+<div id="publicVersionsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <table id="publicVersionsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Is Public</th>
+                    <th>Is In Public Edit Mode</th>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <!-- Add other headers as needed -->
+                </tr>
+            </thead>
             <tbody>
-           
             </tbody>
         </table>
     </div>
 </div>
+
+
+
     `;
    
  
