@@ -88,18 +88,17 @@
         <div class="cockpit">
             <div class="image-container"></div> 
             <div class="buttons">
- <button id="managePrivateVersions">Manage Private Versions</button>
-<button id="managePublicVersions">Manage Public Versions</button>
-
+                <button id="manageVersions">Manage Private Versions</button>
+                <button id="refreshData">Manage Public Versions</button>
            
             </div>
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
         </div>
 
-<div id="privateVersionsModal" class="modal">
+        <div id="versionsModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <table id="privateVersionsTable">
+        <table id="versionsTable">
 <thead>
     <tr>
         <th>ID</th>
@@ -116,37 +115,13 @@
         <th>Workflow State</th>
     </tr>
 </thead>
-<tbody>
-       
-    </tbody>
 
-        </table>
-    </div>
-</div>
-
-
-<div id="publicVersionsModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <table id="publicVersionsTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Is Public</th>
-                    <th>Is In Public Edit Mode</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <!-- Add other headers as needed -->
-                </tr>
-            </thead>
             <tbody>
+           
             </tbody>
         </table>
     </div>
 </div>
-
-
-
     `;
    
  
@@ -162,16 +137,11 @@
      this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
 this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
-
-        this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
-    closeButton.addEventListener("click", () => {
-        const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
-        const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
-        privateModal.style.display = "none";
-        publicModal.style.display = "none";
-    });
+       this._shadowRoot.querySelector(".close").addEventListener("click", () => {
+    const modal = this._shadowRoot.querySelector("#versionsModal");
+    modal.style.display = "none";
 });
-
+        
 
 
         
@@ -267,36 +237,44 @@ _managePrivateVersions() {
             });
 
             // Show the modal
-    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
-    modal.style.display = "block";
-        });
-}
-
-_managePublicVersions() {
-    fetch(this.concatenatedUrl_public)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = this._shadowRoot.querySelector("#publicVersionsTable tbody");
-            tableBody.innerHTML = ""; // Clear previous data
-
-            // Note: Assuming the new JSON structure has an array similar to foreignVersions for public versions. Adjust accordingly if different.
-            const version = data; // As the provided JSON structure is not an array
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${version.id}</td>
-                <td>${version.isPublic}</td>
-                <td>${version.isInPublicEditMode}</td>
-                <td>${version.category}</td>
-                <td>${version.description}</td>
-            `;
-            tableBody.appendChild(row);
-
-            // Show the public versions modal
-            const modal = this._shadowRoot.querySelector("#publicVersionsModal");
+            const modal = this._shadowRoot.querySelector("#versionsModal");
             modal.style.display = "block";
         });
 }
 
+
+ _managePublicVersions() {
+
+    fetch(this.concatenatedUrl_privat)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
+            tableBody.innerHTML = ""; // Clear previous data
+
+            data.foreignVersions.forEach(version => {
+                const row = document.createElement("tr");
+               row.innerHTML = `
+        <td>${version.id}</td>
+        <td>${version.owner}</td>
+        <td>${version.versionId}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId}</td>
+        <td>${version.creationTime}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.changes}</td>
+        <td>${version.isStorageInternal}</td>
+        <td>${version.workflowState}</td>
+    `;
+                tableBody.appendChild(row);
+            });
+
+            // Show the modal
+            const modal = this._shadowRoot.querySelector("#versionsModal");
+            modal.style.display = "block";
+        });
+}
 
 
     
