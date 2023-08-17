@@ -215,6 +215,7 @@
 
 let isDragging = false;
 let offsetX, offsetY;
+let currentModal = null; // Store the modal being dragged
 
 // Get all modal-content elements
 const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
@@ -223,19 +224,22 @@ const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
 modalContents.forEach(modalContent => {
     modalContent.addEventListener("mousedown", (e) => {
         isDragging = true;
-        offsetX = e.clientX - e.currentTarget.getBoundingClientRect().left;
-        offsetY = e.clientY - e.currentTarget.getBoundingClientRect().top;
+        currentModal = modalContent; // Set the current modal being dragged
+        offsetX = e.clientX - modalContent.getBoundingClientRect().left;
+        offsetY = e.clientY - modalContent.getBoundingClientRect().top;
     });
 });
 
 document.addEventListener("mousemove", (e) => {
-    if (isDragging) {
-        const modalContent = this._shadowRoot.querySelector(".modal-content:hover"); // Only get the modal-content that is currently being hovered (and dragged)
-        if (modalContent) {
-            modalContent.style.left = (e.clientX - offsetX) + "px";
-            modalContent.style.top = (e.clientY - offsetY) + "px";
-        }
+    if (isDragging && currentModal) {
+        currentModal.style.left = (e.clientX - offsetX) + "px";
+        currentModal.style.top = (e.clientY - offsetY) + "px";
     }
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+    currentModal = null; // Reset the current modal
 });
 
 
