@@ -71,7 +71,7 @@
 
         
 onCustomWidgetAfterUpdate(changedProperties) {
-
+let alertMessage = "";
    if ("modelId" in changedProperties) {
         let updatedModelId = changedProperties["modelId"];
    alertMessage += `Model ID: ${updatedModelId}\n`; // Adding a newline for clarity
