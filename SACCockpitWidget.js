@@ -88,8 +88,9 @@
         <div class="cockpit">
             <div class="image-container"></div> 
             <div class="buttons">
-                <button id="manageVersions">Manage Private Versions</button>
-                <button id="refreshData">Manage Public Versions</button>
+ <button id="managePrivateVersions">Manage Private Versions</button>
+<button id="managePublicVersions">Manage Public Versions</button>
+
            
             </div>
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
