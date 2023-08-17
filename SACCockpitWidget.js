@@ -21,8 +21,11 @@
     background-color: #4CAF50; /* Green background */
     border-top: 2px solid #FFC107; /* Golden border at the top */
     z-index: 1000; /* Ensure it's on top of other elements */
-    transition: transform 0.3s; /* Smooth slide-out transition */
-    transform: translateY(0%); /* Initial position */
+}
+
+/* Show class to display the modal */
+.modal.show {
+    display: block;
 }
 
 /* Hide the modal initially */
@@ -303,13 +306,14 @@ _managePrivateVersions() {
 
             // Toggle the modal
             const modal = this._shadowRoot.querySelector("#privateVersionsModal");
-            if (modal.classList.contains('hide')) {
-                modal.classList.remove('hide');
+            if (modal.classList.contains('show')) {
+                modal.classList.remove('show');
             } else {
-                modal.classList.add('hide');
+                modal.classList.add('show');
             }
         });
 }
+
 
 _managePublicVersions() {
     fetch(this.concatenatedUrlPublic)
