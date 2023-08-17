@@ -134,8 +134,8 @@
                    
         
         this._props = {}; // properties 
-     this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._manageVersions.bind(this));
-this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._refreshData.bind(this));
+     this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
+this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
        this._shadowRoot.querySelector(".close").addEventListener("click", () => {
     const modal = this._shadowRoot.querySelector("#versionsModal");
@@ -209,7 +209,7 @@ connectedCallback() {
     }
         
         
-_manageVersions() {
+_managePrivateVersions() {
 
     fetch(this.concatenatedUrl_privat)
         .then(response => response.json())
@@ -243,12 +243,38 @@ _manageVersions() {
 }
 
 
-        _refreshData() {
-            // Logic for refreshing data
-            let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'refreshData' } });
-            this.dispatchEvent(actionEvent);
-        }
-    }
+ _managePublicVersions() {
+
+    fetch(this.concatenatedUrl_privat)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
+            tableBody.innerHTML = ""; // Clear previous data
+
+            data.foreignVersions.forEach(version => {
+                const row = document.createElement("tr");
+               row.innerHTML = `
+        <td>${version.id}</td>
+        <td>${version.owner}</td>
+        <td>${version.versionId}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId}</td>
+        <td>${version.creationTime}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.changes}</td>
+        <td>${version.isStorageInternal}</td>
+        <td>${version.workflowState}</td>
+    `;
+                tableBody.appendChild(row);
+            });
+
+            // Show the modal
+            const modal = this._shadowRoot.querySelector("#versionsModal");
+            modal.style.display = "block";
+        });
+}
 
 
     
