@@ -10,27 +10,16 @@
     background-size: cover;
     }
 
+/* Adjust the modal container */
 .modal {
     display: none;
-    position: absolute;
-    top: 100%; /* Start right below the widget */
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    max-height: 400px; /* Adjust based on your preference */
-    overflow-y: auto; /* Make it scrollable */
-    background-color: #4CAF50; /* Green background */
-    border-top: 2px solid #FFC107; /* Golden border at the top */
+    height: 100%;
+    background-color: rgba(0,0,0,0); /* No background color */
     z-index: 1000; /* Ensure it's on top of other elements */
-}
-
-/* Show class to display the modal */
-.modal.show {
-    display: block;
-}
-
-/* Hide the modal initially */
-.modal.hide {
-    transform: translateY(-100%);
 }
 
 /* Adjust the modal content */
@@ -278,43 +267,37 @@ document.addEventListener("mouseup", () => {
         }
 
 
-_managePrivateVersions() {
-    fetch(this.concatenatedUrlPrivate)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
-            tableBody.innerHTML = ""; // Clear previous data
+ _managePrivateVersions() {
+            fetch(this.concatenatedUrlPrivate)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
+                    tableBody.innerHTML = ""; // Clear previous data
 
-            data.foreignVersions.forEach(version => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${version.id}</td>
-                    <td>${version.owner}</td>
-                    <td>${version.versionId}</td>
-                    <td>${version.isInPublicEditMode}</td>
-                    <td>${version.category}</td>
-                    <td>${version.description}</td>
-                    <td>${version.sourceVersionId}</td>
-                    <td>${version.creationTime}</td>
-                    <td>${version.isSuspendedForInputSchedule}</td>
-                    <td>${version.changes}</td>
-                    <td>${version.isStorageInternal}</td>
-                    <td>${version.workflowState}</td>
-                `;
+                    data.foreignVersions.forEach(version => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+        <td>${version.id}</td>
+        <td>${version.owner}</td>
+        <td>${version.versionId}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId}</td>
+        <td>${version.creationTime}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.changes}</td>
+        <td>${version.isStorageInternal}</td>
+        <td>${version.workflowState}</td>
+    `;
                 tableBody.appendChild(row);
             });
 
-            // Toggle the modal
-            const modal = this._shadowRoot.querySelector("#privateVersionsModal");
-            if (modal.classList.contains('show')) {
-                modal.classList.remove('show');
-            } else {
-                modal.classList.add('show');
-            }
-        });
-}
-
-
+            // Show the modal
+                    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
+                    modal.style.display = "block";
+                });
+        }
 _managePublicVersions() {
     fetch(this.concatenatedUrlPublic)
         .then(response => response.json())
@@ -328,28 +311,23 @@ _managePublicVersions() {
             publicVersions.forEach(version => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${version.id}</td>
-                    <td>${version.isInPublicEditMode}</td>
-                    <td>${version.category}</td>
-                    <td>${version.description}</td>
-                    <td>${version.sourceVersionId || 'N/A'}</td>
-                    <td>${version.operations.planning.isSupported}</td>
-                    <td>${version.hasPlanningArea}</td>
-                    <td>${version.workflowState}</td>
-                    <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.id}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId || 'N/A'}</td>
+       <td>${version.operations.planning.isSupported}</td>
+        <td>${version.currencyConversionSetting || 'N/A'}</td>
+        <td>${version.hasPlanningArea}</td>
+        <td>${version.workflowState}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>     
                 `;
                 tableBody.appendChild(row);
             });
-           
-           
-    
-            // Toggle the public versions modal
+
+            // Show the public versions modal
             const modal = this._shadowRoot.querySelector("#publicVersionsModal");
-            if (modal.classList.contains('hide')) {
-                modal.classList.remove('hide');
-            } else {
-                modal.classList.add('hide');
-            }
+            modal.style.display = "block";
         });
 }
 
