@@ -169,38 +169,42 @@ document.addEventListener("mouseup", () => {
             });
         }
 
+_managePrivateVersions() {
+    fetch(this.concatenatedUrlPrivate)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
+            tableBody.innerHTML = ""; // Clear previous data
 
- _managePrivateVersions() {
-            fetch(this.concatenatedUrlPrivate)
-                .then(response => response.json())
-                .then(data => {
-                    const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
-                    tableBody.innerHTML = ""; // Clear previous data
-
-                    data.foreignVersions.forEach(version => {
-                        const row = document.createElement("tr");
-                        row.innerHTML = `
-        <td>${version.id}</td>
-        <td>${version.owner}</td>
-        <td>${version.versionId}</td>
-        <td>${version.isInPublicEditMode}</td>
-        <td>${version.category}</td>
-        <td>${version.description}</td>
-        <td>${version.sourceVersionId}</td>
-        <td>${version.creationTime}</td>
-        <td>${version.isSuspendedForInputSchedule}</td>
-        <td>${version.changes}</td>
-        <td>${version.isStorageInternal}</td>
-        <td>${version.workflowState}</td>
-    `;
+            data.foreignVersions.forEach(version => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${version.id}</td>
+                    <td>${version.owner}</td>
+                    <td>${version.versionId}</td>
+                    <td>${version.isInPublicEditMode}</td>
+                    <td>${version.category}</td>
+                    <td>${version.description}</td>
+                    <td>${version.sourceVersionId}</td>
+                    <td>${version.creationTime}</td>
+                    <td>${version.isSuspendedForInputSchedule}</td>
+                    <td>${version.changes}</td>
+                    <td>${version.isStorageInternal}</td>
+                    <td>${version.workflowState}</td>
+                `;
                 tableBody.appendChild(row);
             });
 
-            // Show the modal
-                    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
-                    modal.style.display = "block";
-                });
-        }
+            // Show the table container
+            const tableContainer = this._shadowRoot.querySelector("#privateVersionsTableContainer");
+            tableContainer.style.display = "block";
+
+            // Hide the public versions table container
+            const publicTableContainer = this._shadowRoot.querySelector("#publicVersionsTableContainer");
+            publicTableContainer.style.display = "none";
+        });
+}
+
 _managePublicVersions() {
     fetch(this.concatenatedUrlPublic)
         .then(response => response.json())
@@ -214,22 +218,26 @@ _managePublicVersions() {
             publicVersions.forEach(version => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-        <td>${version.id}</td>
-        <td>${version.isInPublicEditMode}</td>
-        <td>${version.category}</td>
-        <td>${version.description}</td>
-        <td>${version.sourceVersionId || 'N/A'}</td>
-       <td>${version.operations.planning.isSupported}</td>
-        <td>${version.hasPlanningArea}</td>
-        <td>${version.workflowState}</td>
-        <td>${version.isSuspendedForInputSchedule}</td>     
+                    <td>${version.id}</td>
+                    <td>${version.isInPublicEditMode}</td>
+                    <td>${version.category}</td>
+                    <td>${version.description}</td>
+                    <td>${version.sourceVersionId || 'N/A'}</td>
+                    <td>${version.operations.planning.isSupported}</td>
+                    <td>${version.hasPlanningArea}</td>
+                    <td>${version.workflowState}</td>
+                    <td>${version.isSuspendedForInputSchedule}</td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            // Show the public versions modal
-            const modal = this._shadowRoot.querySelector("#publicVersionsModal");
-            modal.style.display = "block";
+            // Show the public versions table container
+            const tableContainer = this._shadowRoot.querySelector("#publicVersionsTableContainer");
+            tableContainer.style.display = "block";
+
+            // Hide the private versions table container
+            const privateTableContainer = this._shadowRoot.querySelector("#privateVersionsTableContainer");
+            privateTableContainer.style.display = "none";
         });
 }
 
