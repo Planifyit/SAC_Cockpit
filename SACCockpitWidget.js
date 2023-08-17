@@ -81,16 +81,23 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <table id="versionsTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Owner</th>
-                    <th>Version ID</th>
-                    <th>Is In Public Edit Mode</th>
-                    <th>Category</th>
-                    <!-- Add other headers as needed -->
-                </tr>
-            </thead>
+<thead>
+    <tr>
+        <th>ID</th>
+        <th>Owner</th>
+        <th>Version ID</th>
+        <th>Is In Public Edit Mode</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Source Version ID</th>
+        <th>Creation Time</th>
+        <th>Is Suspended For Input Schedule</th>
+        <th>Changes</th>
+        <th>Is Storage Internal</th>
+        <th>Workflow State</th>
+    </tr>
+</thead>
+
             <tbody>
            
             </tbody>
@@ -168,13 +175,20 @@ _manageVersions() {
 
             data.foreignVersions.forEach(version => {
                 const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${version.id}</td>
-                    <td>${version.owner}</td>
-                    <td>${version.versionId}</td>
-                    <td>${version.isInPublicEditMode}</td>
-                    <td>${version.category}</td>
-                `;
+               row.innerHTML = `
+        <td>${version.id}</td>
+        <td>${version.owner}</td>
+        <td>${version.versionId}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId}</td>
+        <td>${version.creationTime}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.changes}</td>
+        <td>${version.isStorageInternal}</td>
+        <td>${version.workflowState}</td>
+    `;
                 tableBody.appendChild(row);
             });
 
