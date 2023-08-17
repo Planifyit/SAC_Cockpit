@@ -54,19 +54,19 @@
         },
      "modelId": {
         "type": "string",
-        "default": ""
+        "default": "Cdlg2a1kkbj139ea3kjvk86s05k"
     }, 
              "tenantUrl": {
         "type": "string",
-        "default": ""
+        "default": "https://planifyit.eu10.hcs.cloud.sap"
     },
                      "apiString": {
         "type": "string",
-        "default": ""
+        "default": "/sap/fpa/services/rest/v1/internal/models/"
     },
                      "privateVersionLocation": {
         "type": "string",
-        "default": ""
+        "default": "/foreign-versions?tenant=7"
     }
     },
     "methods": {
