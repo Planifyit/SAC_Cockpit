@@ -55,6 +55,18 @@
      "modelId": {
         "type": "string",
         "default": ""
+    }, 
+             "tenantUrl": {
+        "type": "string",
+        "default": ""
+    },
+                     "apiString": {
+        "type": "string",
+        "default": ""
+    },
+                     "privateVersionLocation": {
+        "type": "string",
+        "default": ""
     }
     },
     "methods": {
