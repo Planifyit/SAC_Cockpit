@@ -36,6 +36,7 @@
     z-index: 1001; /* Ensure it's on top of the modal container */
 }
 
+
             .close {
                 color: #FF5722; /* Reddish color for close button */
                 float: right;
@@ -47,9 +48,9 @@
 
 /* Modal styling for both public and private modals */
 #publicVersionsModal, #privateVersionsModal {
-    background-color: green; /* Green background for the modal */
-    padding: 20px; /* Some padding to give it space */
-    border: 5px solid yellow; /* Yellow lining/border */
+    background-color: transparent; /* No background color */
+    padding: 0; /* Remove padding */
+    border: none; /* Remove border */
     position: relative; /* To position the close button absolutely within the modal */
 }
 
