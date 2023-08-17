@@ -272,7 +272,30 @@ _managePrivateVersions() {
         });
 }
 
+_managePublicVersions() {
+    fetch(this.concatenatedUrl_public)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = this._shadowRoot.querySelector("#publicVersionsTable tbody");
+            tableBody.innerHTML = ""; // Clear previous data
 
+            // Note: Assuming the new JSON structure has an array similar to foreignVersions for public versions. Adjust accordingly if different.
+            const version = data; // As the provided JSON structure is not an array
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${version.id}</td>
+                <td>${version.isPublic}</td>
+                <td>${version.isInPublicEditMode}</td>
+                <td>${version.category}</td>
+                <td>${version.description}</td>
+            `;
+            tableBody.appendChild(row);
+
+            // Show the public versions modal
+            const modal = this._shadowRoot.querySelector("#publicVersionsModal");
+            modal.style.display = "block";
+        });
+}
 
 
 
