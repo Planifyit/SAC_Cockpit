@@ -32,6 +32,7 @@
                         <td><input id="builder_private_version_location" type="text"></td>
                     </tr>
                 </table>
+                <button id="applyChanges">Apply Changes</button>
                 <input type="submit" style="display:none;">
             </fieldset>
         </form>
@@ -42,7 +43,8 @@
             super();
             this._shadowRoot = this.attachShadow({ mode: 'open' });
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
-            this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
+         this._shadowRoot.getElementById("applyChanges").addEventListener("click", this._submit.bind(this));
+ 
         }
 
         _submit(e) {
