@@ -1,8 +1,8 @@
 (function () {
     let tmpl = document.createElement('template');
-   tmpl.innerHTML = `
-    <style>
-  .image-container {
+    tmpl.innerHTML = `
+        <style>
+                   .image-container {
         width: 100%;
         height: 100px;
         
@@ -10,112 +10,243 @@
     background-size: cover;
     }
 
-        /* Adjust the table container */
-        .table-container {
-            margin-top: 10px;
-            overflow-y: auto;
-            max-height: 400px; /* Adjust based on your preference */
-            border-top: 2px solid #FFC107; /* Golden border at the top */
-        }
+/* Adjust the modal container */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0); /* No background color */
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
 
-        /* Table styling */
-        table {
-            width: 100%; /* Full width */
-            border-collapse: collapse; /* Collapse borders */
-        }
+/* Adjust the modal content */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4CAF50; /* Green background */
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid #FFC107; /* Golden border */
+    cursor: move; /* Indicate the modal is draggable */
+    z-index: 1001; /* Ensure it's on top of the modal container */
+}
 
-        /* Table header styling */
-        th {
-            background-color: #ddd; /* Light gray background */
-            border-bottom: 2px solid black; /* Black bottom border */
-        }
 
-        /* Table cell styling */
-        td, th {
-            padding: 10px; /* Some padding for spacing */
-            border-right: 1px solid black; /* Right border for each cell */
-        }
+  /* Adjust the close button styling */
+.close {
+    color: #FF5722; /* Reddish color for close button */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: transparent; /* No background color */
+}
 
-        /* Remove right border for the last cell */
-        td:last-child, th:last-child {
-            border-right: none;
-        }
-    </style>
 
-    <div class="cockpit">
-        <div class="image-container"></div> 
-        <div class="buttons">
-            <button id="managePrivateVersions">Manage Private Versions</button>
-            <button id="managePublicVersions">Manage Public Versions</button>
+/* Modal styling for both public and private modals */
+#publicVersionsModal, #privateVersionsModal {
+    background-color: transparent; /* No background color */
+    padding: 0; /* Remove padding */
+    border: none; /* Remove border */
+    position: relative; /* To position the close button absolutely within the modal */
+}
+
+
+/* Close button styling for both modals */
+#publicVersionsModal .close, #privateVersionsModal .close {
+    position: absolute; /* Absolute positioning */
+    top: 5px; /* Adjusted from 10px to 5px */
+    right: 5px; /* Adjusted from 10px to 5px */
+    background-color: transparent; /* No background color */
+    color: #FF5722; /* Reddish color for close button */
+    border: none; /* Remove any default borders */
+    cursor: pointer; /* Hand cursor on hover */
+}
+
+
+/* Table styling for both modals */
+#publicVersionsModal table, #privateVersionsModal table {
+    width: 100%; /* Full width of the modal */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+/* Table header styling for both modals */
+#publicVersionsModal th, #privateVersionsModal th {
+    background-color: #ddd; /* Light gray background */
+    border-bottom: 2px solid black; /* Black bottom border */
+}
+
+/* Table cell styling for both modals */
+#publicVersionsModal td, #publicVersionsModal th, #privateVersionsModal td, #privateVersionsModal th {
+    padding: 10px; /* Some padding for spacing */
+    border-right: 1px solid black; /* Right border for each cell */
+}
+
+/* Remove right border for the last cell in both modals */
+#publicVersionsModal td:last-child, #publicVersionsModal th:last-child, #privateVersionsModal td:last-child, #privateVersionsModal th:last-child {
+    border-right: none;
+}
+
+
+
+
+
+            .cockpit {
+                display: flex;
+                flex-direction: column;
+                width: 300px;
+                background-color: #f0f0f0;
+                border-radius: 4px;
+                padding: 10px;
+            }
+
+            .follow-link {
+                font-size: 10px;
+            }
+
+            .buttons {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 5px;
+            }
+
+            .buttons > button {
+                height: 30px;
+                border: none;
+                color: #fff;
+                border-radius: 4px;
+                background-color: #007BFF;
+            }
+
+            .buttons > button:active {
+                transform: scale(0.95);
+            }
+        </style>
+        <div class="cockpit">
+            <div class="image-container"></div> 
+            <div class="buttons">
+                <button id="managePrivateVersions">Manage Private Versions</button>
+                <button id="managePublicVersions">Manage Public Versions</button>
+            </div>
+            <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
         </div>
-        <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
-    </div>
 
-    <div id="privateVersionsTableContainer" class="table-container">
-        <table id="privateVersionsTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Owner</th>
-                    <th>Version ID</th>
-                    <th>Is In Public Edit Mode</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Source Version ID</th>
-                    <th>Creation Time</th>
-                    <th>Is Suspended For Input Schedule</th>
-                    <th>Changes</th>
-                    <th>Is Storage Internal</th>
-                    <th>Workflow State</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
+        <div id="privateVersionsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <table id="privateVersionsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Owner</th>
+                            <th>Version ID</th>
+                            <th>Is In Public Edit Mode</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Source Version ID</th>
+                            <th>Creation Time</th>
+                            <th>Is Suspended For Input Schedule</th>
+                            <th>Changes</th>
+                            <th>Is Storage Internal</th>
+                            <th>Workflow State</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    <div id="publicVersionsTableContainer" class="table-container">
-        <table id="publicVersionsTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Is In Public Edit Mode</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Source Version ID</th>
-                    <th>Planning Supported</th>
-                    <th>Has Planning Area</th>
-                    <th>Workflow State</th>
-                    <th>Is Suspended For Input Schedule</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
-`;
-
+        <div id="publicVersionsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <table id="publicVersionsTable">
+                    <thead>
+                        <tr>
+                          <th>ID</th>
+            <th>Is Public</th>
+            <th>Is In Public Edit Mode</th>
+            <th>Is Shared</th>
+            <th>Owner</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Source Version ID</th>
+            <th>Creation Time</th>
+            <th>Copying Supported</th>
+            <th>Planning Supported</th>
+       
+            <th>Currency Conversion Setting</th>
+            <th>Has Planning Area</th>
+            <th>Workflow State</th>
+            <th>Is Suspended For Input Schedule</th>
+            <th>Is Writeback Enabled</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
    
   class SACCockpit extends HTMLElement {
-       constructor() {
-    super();
-    this._shadowRoot = this.attachShadow({ mode: 'open' });
-    this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
+        constructor() {
+            super();
+            this._shadowRoot = this.attachShadow({ mode: 'open' });
+            this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
 
-    this._props = {}; // properties 
+            this._props = {}; // properties 
 
-    this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
-    this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
+            this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
+            this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
-    this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
-        closeButton.addEventListener("click", () => {
-            const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
-            const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
-            privateModal.style.display = "none";
-            publicModal.style.display = "none";
-        });
+            this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
+                closeButton.addEventListener("click", () => {
+                    const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
+                    const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
+                    privateModal.style.display = "none";
+                    publicModal.style.display = "none";
+                });
+            });
+
+let isDragging = false;
+let offsetX, offsetY;
+let currentModal = null; // Store the modal being dragged
+
+// Get all modal-content elements
+const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
+
+// Loop through each modal-content and attach the drag functionality
+modalContents.forEach(modalContent => {
+    modalContent.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        currentModal = modalContent; // Set the current modal being dragged
+        offsetX = e.clientX - modalContent.getBoundingClientRect().left;
+        offsetY = e.clientY - modalContent.getBoundingClientRect().top;
     });
-}
+});
+
+document.addEventListener("mousemove", (e) => {
+    if (isDragging && currentModal) {
+        currentModal.style.left = (e.clientX - offsetX) + "px";
+        currentModal.style.top = (e.clientY - offsetY) + "px";
+    }
+});
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+    currentModal = null; // Reset the current modal
+});
+
+
+
+            
+        }
 
         onCustomWidgetBeforeUpdate(changedProperties) {
             this._props = { ...this._props, ...changedProperties };
@@ -142,42 +273,38 @@
             });
         }
 
-_managePrivateVersions() {
-    fetch(this.concatenatedUrlPrivate)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
-            tableBody.innerHTML = ""; // Clear previous data
 
-            data.foreignVersions.forEach(version => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${version.id}</td>
-                    <td>${version.owner}</td>
-                    <td>${version.versionId}</td>
-                    <td>${version.isInPublicEditMode}</td>
-                    <td>${version.category}</td>
-                    <td>${version.description}</td>
-                    <td>${version.sourceVersionId}</td>
-                    <td>${version.creationTime}</td>
-                    <td>${version.isSuspendedForInputSchedule}</td>
-                    <td>${version.changes}</td>
-                    <td>${version.isStorageInternal}</td>
-                    <td>${version.workflowState}</td>
-                `;
+ _managePrivateVersions() {
+            fetch(this.concatenatedUrlPrivate)
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
+                    tableBody.innerHTML = ""; // Clear previous data
+
+                    data.foreignVersions.forEach(version => {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+        <td>${version.id}</td>
+        <td>${version.owner}</td>
+        <td>${version.versionId}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId}</td>
+        <td>${version.creationTime}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.changes}</td>
+        <td>${version.isStorageInternal}</td>
+        <td>${version.workflowState}</td>
+    `;
                 tableBody.appendChild(row);
             });
 
-            // Show the table container
-            const tableContainer = this._shadowRoot.querySelector("#privateVersionsTableContainer");
-            tableContainer.style.display = "block";
-
-            // Hide the public versions table container
-            const publicTableContainer = this._shadowRoot.querySelector("#publicVersionsTableContainer");
-            publicTableContainer.style.display = "none";
-        });
-}
-
+            // Show the modal
+                    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
+                    modal.style.display = "block";
+                });
+        }
 _managePublicVersions() {
     fetch(this.concatenatedUrlPublic)
         .then(response => response.json())
@@ -191,26 +318,29 @@ _managePublicVersions() {
             publicVersions.forEach(version => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${version.id}</td>
-                    <td>${version.isInPublicEditMode}</td>
-                    <td>${version.category}</td>
-                    <td>${version.description}</td>
-                    <td>${version.sourceVersionId || 'N/A'}</td>
-                    <td>${version.operations.planning.isSupported}</td>
-                    <td>${version.hasPlanningArea}</td>
-                    <td>${version.workflowState}</td>
-                    <td>${version.isSuspendedForInputSchedule}</td>
+           <td>${version.id}</td>
+        <td>${version.isPublic}</td>
+        <td>${version.isInPublicEditMode}</td>
+        <td>${version.isShared}</td>
+        <td>${version.owner || 'N/A'}</td>
+        <td>${version.category}</td>
+        <td>${version.description}</td>
+        <td>${version.sourceVersionId || 'N/A'}</td>
+        <td>${version.creationTime || 'N/A'}</td>
+        <td>${version.operations.copying.isSupported}</td>
+        <td>${version.operations.planning.isSupported}</td>
+        <td>${version.currencyConversionSetting || 'N/A'}</td>
+        <td>${version.hasPlanningArea}</td>
+        <td>${version.workflowState}</td>
+        <td>${version.isSuspendedForInputSchedule}</td>
+        <td>${version.isWritebackEnabled}</td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            // Show the public versions table container
-            const tableContainer = this._shadowRoot.querySelector("#publicVersionsTableContainer");
-            tableContainer.style.display = "block";
-
-            // Hide the private versions table container
-            const privateTableContainer = this._shadowRoot.querySelector("#privateVersionsTableContainer");
-            privateTableContainer.style.display = "none";
+            // Show the public versions modal
+            const modal = this._shadowRoot.querySelector("#publicVersionsModal");
+            modal.style.display = "block";
         });
 }
 
