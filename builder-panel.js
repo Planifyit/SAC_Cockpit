@@ -23,6 +23,14 @@
                         <td><label for="builder_tenant_url">Tenant URL:</label></td>
                         <td><input id="builder_tenant_url" type="text"></td>
                     </tr>
+                    <tr>
+                        <td><label for="builder_api_string">API String:</label></td>
+                        <td><input id="builder_api_string" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="builder_private_version_location">Private Version Location:</label></td>
+                        <td><input id="builder_private_version_location" type="text"></td>
+                    </tr>
                 </table>
                 <input type="submit" style="display:none;">
             </fieldset>
@@ -43,7 +51,9 @@
                 detail: {
                     properties: {
                         modelId: this.modelId,
-                        tenantUrl: this.tenantUrl
+                        tenantUrl: this.tenantUrl,
+                        apiString: this.apiString,
+                        privateVersionLocation: this.privateVersionLocation
                     }
                 }
             }));
@@ -63,6 +73,22 @@
 
         get tenantUrl() {
             return this._shadowRoot.getElementById("builder_tenant_url").value;
+        }
+
+        set apiString(newApiString) {
+            this._shadowRoot.getElementById("builder_api_string").value = newApiString;
+        }
+
+        get apiString() {
+            return this._shadowRoot.getElementById("builder_api_string").value;
+        }
+
+        set privateVersionLocation(newPrivateVersionLocation) {
+            this._shadowRoot.getElementById("builder_private_version_location").value = newPrivateVersionLocation;
+        }
+
+        get privateVersionLocation() {
+            return this._shadowRoot.getElementById("builder_private_version_location").value;
         }
     }
 
