@@ -317,7 +317,6 @@ _managePublicVersions() {
         <td>${version.description}</td>
         <td>${version.sourceVersionId || 'N/A'}</td>
        <td>${version.operations.planning.isSupported}</td>
-        <td>${version.currencyConversionSetting || 'N/A'}</td>
         <td>${version.hasPlanningArea}</td>
         <td>${version.workflowState}</td>
         <td>${version.isSuspendedForInputSchedule}</td>     
