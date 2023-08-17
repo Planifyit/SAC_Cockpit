@@ -88,8 +88,8 @@
         <div class="cockpit">
             <div class="image-container"></div> 
             <div class="buttons">
-                <button id="manageVersions">Manage Private Versions</button>
-                <button id="refreshData">Manage Public Versions</button>
+                <button id="manageVersions">Manage Versions</button>
+                <button id="refreshData">Refresh Data</button>
            
             </div>
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
@@ -134,9 +134,8 @@
                    
         
         this._props = {}; // properties 
-     this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
-this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
-
+         this._shadowRoot.querySelector('#manageVersions').addEventListener('click', this._manageVersions.bind(this));
+            this._shadowRoot.querySelector('#refreshData').addEventListener('click', this._refreshData.bind(this));
        this._shadowRoot.querySelector(".close").addEventListener("click", () => {
     const modal = this._shadowRoot.querySelector("#versionsModal");
     modal.style.display = "none";
@@ -182,14 +181,12 @@ onCustomWidgetAfterUpdate(changedProperties) {
     let currentTenantUrl = "tenantUrl" in changedProperties ? changedProperties["tenantUrl"] : this.tenantUrl;
     let currentApiString = "apiString" in changedProperties ? changedProperties["apiString"] : this.apiString;
     let currentPrivateVersionLocation = "privateVersionLocation" in changedProperties ? changedProperties["privateVersionLocation"] : this.privateVersionLocation;
-    let currentPublicVersionLocation = "publicVersionLocation" in changedProperties ? changedProperties["publicVersionLocation"] : this.publicVersionLocation;
 
     // Concatenate the values
-    let concatenatedString_Privat = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
-    let concatenatedString_Public = currentTenantUrl + currentApiString + currentModelId + currentPublicVersionLocation;
+    let concatenatedString = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
   
-    this.concatenatedUrl_privat = concatenatedString_Privat ;
-    this.concatenatedUrl_public = concatenatedString_Public ;
+    this.concatenatedUrl = concatenatedString ;
+ 
  
     
 }
@@ -209,9 +206,9 @@ connectedCallback() {
     }
         
         
-_managePrivateVersions() {
+_manageVersions() {
 
-    fetch(this.concatenatedUrl_privat)
+    fetch(this.concatenatedUrl)
         .then(response => response.json())
         .then(data => {
             const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
@@ -243,38 +240,12 @@ _managePrivateVersions() {
 }
 
 
- _managePublicVersions() {
-
-    fetch(this.concatenatedUrl_privat)
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
-            tableBody.innerHTML = ""; // Clear previous data
-
-            data.foreignVersions.forEach(version => {
-                const row = document.createElement("tr");
-               row.innerHTML = `
-        <td>${version.id}</td>
-        <td>${version.owner}</td>
-        <td>${version.versionId}</td>
-        <td>${version.isInPublicEditMode}</td>
-        <td>${version.category}</td>
-        <td>${version.description}</td>
-        <td>${version.sourceVersionId}</td>
-        <td>${version.creationTime}</td>
-        <td>${version.isSuspendedForInputSchedule}</td>
-        <td>${version.changes}</td>
-        <td>${version.isStorageInternal}</td>
-        <td>${version.workflowState}</td>
-    `;
-                tableBody.appendChild(row);
-            });
-
-            // Show the modal
-            const modal = this._shadowRoot.querySelector("#versionsModal");
-            modal.style.display = "block";
-        });
-}
+        _refreshData() {
+            // Logic for refreshing data
+            let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'refreshData' } });
+            this.dispatchEvent(actionEvent);
+        }
+    }
 
 
     
