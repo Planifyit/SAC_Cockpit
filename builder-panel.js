@@ -31,6 +31,11 @@
                         <td><label for="builder_private_version_location">Private Version Location:</label></td>
                         <td><input id="builder_private_version_location" type="text"></td>
                     </tr>
+                     <tr>
+                        <td><label for="builder_public_version_location">Public Version Location:</label></td>
+                        <td><input id="builder_public_version_location" type="text"></td>
+                    </tr>
+                    
                 </table>
                 <button id="applyChanges">Apply Changes</button>
                 <input type="submit" style="display:none;">
@@ -55,7 +60,8 @@
                         modelId: this.modelId,
                         tenantUrl: this.tenantUrl,
                         apiString: this.apiString,
-                        privateVersionLocation: this.privateVersionLocation
+                        privateVersionLocation: this.privateVersionLocation,
+                        publicVersionLocation: this.publicVersionLocation
                     }
                 }
             }));
@@ -91,6 +97,14 @@
 
         get privateVersionLocation() {
             return this._shadowRoot.getElementById("builder_private_version_location").value;
+        }
+        
+        set publicVersionLocation(newPublicVersionLocation) {
+            this._shadowRoot.getElementById("builder_public_version_location").value = newPublicVersionLocation;
+        }
+
+        get publicVersionLocation() {
+            return this._shadowRoot.getElementById("builder_public_version_location").value;
         }
     }
 
