@@ -19,6 +19,10 @@
                         <td><label for="builder_model_id">Model ID:</label></td>
                         <td><input id="builder_model_id" type="text"></td>
                     </tr>
+                    <tr>
+                        <td><label for="builder_tenant_url">Tenant URL:</label></td>
+                        <td><input id="builder_tenant_url" type="text"></td>
+                    </tr>
                 </table>
                 <input type="submit" style="display:none;">
             </fieldset>
@@ -30,8 +34,7 @@
             super();
             this._shadowRoot = this.attachShadow({ mode: 'open' });
             this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
-    this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
-  
+            this._shadowRoot.getElementById("form").addEventListener("submit", this._submit.bind(this));
         }
 
         _submit(e) {
@@ -39,18 +42,27 @@
             this.dispatchEvent(new CustomEvent("propertiesChanged", {
                 detail: {
                     properties: {
-                        modelId: this.modelId
+                        modelId: this.modelId,
+                        tenantUrl: this.tenantUrl
                     }
                 }
             }));
         }
 
         set modelId(newModelId) {
-                	this._shadowRoot.getElementById("builder_model_id").value = newModelId;
+            this._shadowRoot.getElementById("builder_model_id").value = newModelId;
         }
 
         get modelId() {
             return this._shadowRoot.getElementById("builder_model_id").value;
+        }
+
+        set tenantUrl(newTenantUrl) {
+            this._shadowRoot.getElementById("builder_tenant_url").value = newTenantUrl;
+        }
+
+        get tenantUrl() {
+            return this._shadowRoot.getElementById("builder_tenant_url").value;
         }
     }
 
