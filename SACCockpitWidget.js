@@ -159,9 +159,8 @@ connectedCallback() {
         
         
 _manageVersions() {
-    // Fetch the data
-    const url = "YOUR_URL_HERE"; // Replace with your concatenated URL
-    fetch(url)
+
+    fetch(this.concatenatedUrl)
         .then(response => response.json())
         .then(data => {
             const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
