@@ -181,12 +181,14 @@ onCustomWidgetAfterUpdate(changedProperties) {
     let currentTenantUrl = "tenantUrl" in changedProperties ? changedProperties["tenantUrl"] : this.tenantUrl;
     let currentApiString = "apiString" in changedProperties ? changedProperties["apiString"] : this.apiString;
     let currentPrivateVersionLocation = "privateVersionLocation" in changedProperties ? changedProperties["privateVersionLocation"] : this.privateVersionLocation;
+    let currentPublicVersionLocation = "publicVersionLocation" in changedProperties ? changedProperties["publicVersionLocation"] : this.publicVersionLocation;
 
     // Concatenate the values
-    let concatenatedString = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
+    let concatenatedString_Privat = currentTenantUrl + currentApiString + currentModelId + currentPrivateVersionLocation;
+    let concatenatedString_Public = currentTenantUrl + currentApiString + currentModelId + currentPublicVersionLocation;
   
-    this.concatenatedUrl = concatenatedString ;
- 
+    this.concatenatedUrl_privat = concatenatedString_Privat ;
+    this.concatenatedUrl_public = concatenatedString_Public ;
  
     
 }
@@ -208,7 +210,7 @@ connectedCallback() {
         
 _manageVersions() {
 
-    fetch(this.concatenatedUrl)
+    fetch(this.concatenatedUrl_privat)
         .then(response => response.json())
         .then(data => {
             const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
