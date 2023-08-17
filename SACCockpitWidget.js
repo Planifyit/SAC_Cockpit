@@ -245,7 +245,7 @@ _managePrivateVersions() {
 
  _managePublicVersions() {
 
-    fetch(this.concatenatedUrl_privat)
+    fetch(this.concatenatedUrl_public)
         .then(response => response.json())
         .then(data => {
             const tableBody = this._shadowRoot.querySelector("#versionsTable tbody");
