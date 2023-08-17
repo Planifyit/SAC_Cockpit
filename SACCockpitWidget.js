@@ -79,10 +79,19 @@ onCustomWidgetAfterUpdate(changedProperties) {
     }
 
     
-   if ("tenantUrl" in changedProperties) {
+ if ("tenantUrl" in changedProperties) {
         let updatedtenantUrl = changedProperties["tenantUrl"];
-  
-        window.alert(`tenant Url: ${updatedtenantUrl}`);
+        // Handle the updated tenant URL as needed
+    }
+
+    if ("apiString" in changedProperties) {
+        let updatedApiString = changedProperties["apiString"];
+        // Handle the updated API string as needed
+    }
+
+    if ("privateVersionLocation" in changedProperties) {
+        let updatedPrivateVersionLocation = changedProperties["privateVersionLocation"];
+        // Handle the updated private version location as needed
     }
     }     
 
