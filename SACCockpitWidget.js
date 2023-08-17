@@ -103,13 +103,28 @@ connectedCallback() {
         
         
 _manageVersions() {
-     window.alert(concatenatedString);
-            // Logic for managing versions
-            let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'manageVersions' } });
-            this.dispatchEvent(actionEvent);
-    
-   
-        }
+    const url = "https://sac-d-bit.eu10.hcs.cloud.sap/sap/fpa/services/rest/v1/internal/models/Cdlg2a1kkbj139ea3kjvk86s05k/foreign-versions?tenant=7";
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // This will log the JSON data to the console
+            // You can process the data further here
+        })
+        .catch(error => {
+            console.log('There was a problem with the fetch operation:', error.message);
+        });
+
+    // Logic for managing versions
+    let actionEvent = new CustomEvent('onActionTriggered', { detail: { action: 'manageVersions' } });
+    this.dispatchEvent(actionEvent);
+}
+
 
         _refreshData() {
             // Logic for refreshing data
