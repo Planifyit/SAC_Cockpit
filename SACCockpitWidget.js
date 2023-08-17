@@ -276,7 +276,7 @@ _managePublicVersions() {
             tableBody.innerHTML = ""; // Clear previous data
 
             // Filter out only the public versions
-            const publicVersions = data.versions.filter(version => version.isPublic);
+            const publicVersions = data.versions;
 
             publicVersions.forEach(version => {
                 const row = document.createElement("tr");
