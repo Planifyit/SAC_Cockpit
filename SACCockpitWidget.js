@@ -88,8 +88,8 @@
         <div class="cockpit">
             <div class="image-container"></div> 
             <div class="buttons">
-                <button id="manageVersions">Manage Versions</button>
-                <button id="refreshData">Refresh Data</button>
+                <button id="manageVersions">Manage Private Versions</button>
+                <button id="refreshData">Manage Public Versions</button>
            
             </div>
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
@@ -134,8 +134,9 @@
                    
         
         this._props = {}; // properties 
-         this._shadowRoot.querySelector('#manageVersions').addEventListener('click', this._manageVersions.bind(this));
-            this._shadowRoot.querySelector('#refreshData').addEventListener('click', this._refreshData.bind(this));
+     this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._manageVersions.bind(this));
+this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._refreshData.bind(this));
+
        this._shadowRoot.querySelector(".close").addEventListener("click", () => {
     const modal = this._shadowRoot.querySelector("#versionsModal");
     modal.style.display = "none";
