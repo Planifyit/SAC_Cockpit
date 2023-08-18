@@ -279,7 +279,7 @@ class SACCockpit extends HTMLElement {
         document.addEventListener("mouseup", this.handleMouseUp);
     }
 
-   _handleMouseMove(e) {
+_handleMouseMove(e) {
     if (this.isDragging && this.currentModal) {
         let newLeft = e.clientX - this.offsetX;
         let newTop = e.clientY - this.offsetY;
@@ -300,14 +300,15 @@ class SACCockpit extends HTMLElement {
             newTop = cockpitBounds.bottom;
         } 
         // Bottom boundary
-        else if (newTop + this.currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
-            newTop = (cockpitBounds.bottom + window.innerHeight) - this.currentModal.offsetHeight;
+        else if (newTop + this.currentModal.offsetHeight > window.innerHeight) {
+            newTop = window.innerHeight - this.currentModal.offsetHeight;
         }
 
         this.currentModal.style.left = newLeft + "px";
         this.currentModal.style.top = newTop + "px";
     }
 }
+
 
 
 
