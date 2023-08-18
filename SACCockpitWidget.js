@@ -251,17 +251,17 @@ class SACCockpit extends HTMLElement {
         this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
         this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
-  this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
+this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
     closeButton.addEventListener("click", () => {
         const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
         const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
         privateModal.style.display = "none";
         publicModal.style.display = "none";
-        
-        // Reset the cockpit's z-index
-        this._shadowRoot.querySelector('.cockpit').style.zIndex = '999';
+
+        this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'auto'; // Enable interactions with the cockpit
     });
 });
+
 
 
         // Set up mousedown event for each modalContent
@@ -387,11 +387,13 @@ if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px
     modalContent.style.left = `${cockpitBounds.left}px`;
     modalContent.style.transform = 'none'; // Reset the transform
                     
-               
-     this._shadowRoot.querySelector('.cockpit').style.zIndex = '998';     
-            // Show the modal
-                    const modal = this._shadowRoot.querySelector("#privateVersionsModal");
-                    modal.style.display = "block";
+
+// Show the modal
+const modal = this._shadowRoot.querySelector("#privateVersionsModal");
+modal.style.display = "block";
+this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'none'; // Disable interactions with the cockpit
+
+      
                 });
 
 
@@ -442,9 +444,14 @@ _managePublicVersions() {
     
             this._shadowRoot.querySelector('.cockpit').style.zIndex = '998';
               
-            // Show the public versions modal
+           
+  // Show the public versions modal
             const modal = this._shadowRoot.querySelector("#publicVersionsModal");
             modal.style.display = "block";
+this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'none'; // Disable interactions with the cockpit
+
+
+            
         });
 }
 
