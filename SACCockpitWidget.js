@@ -180,7 +180,9 @@ th {
                 <span class="close">&times;</span>
                 <table id="privateVersionsTable">
                     <thead>
-                        <tr>
+                        <tr> 
+                        <th>Publish</th>
+                         <th>Delete</th>
                             <th>ID</th>
                             <th>Owner</th>
                             <th>Version ID</th>
@@ -207,6 +209,8 @@ th {
                 <table id="publicVersionsTable">
                     <thead>
                         <tr>
+                          <th>Publish</th>
+                         <th>Delete</th>
                           <th>ID</th>
             <th>Is Public</th>
             <th>Is In Public Edit Mode</th>
@@ -262,6 +266,19 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
     });
 });
 
+this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        const row = e.target.closest("tr");
+        this.selectedID = row.querySelector("td:nth-child(3)").textContent; // Assuming ID is now in the 3rd column
+    });
+});
+
+this._shadowRoot.querySelectorAll(".delete-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        const row = e.target.closest("tr");
+        this.selectedID = row.querySelector("td:nth-child(3)").textContent; // Assuming ID is now in the 3rd column
+    });
+});
 
 
         // Set up mousedown event for each modalContent
@@ -316,7 +333,9 @@ if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px
 
 
 
-
+getID() {
+    return this.selectedID;
+}
 
  _handleMouseUp() {
         this.isDragging = false;
@@ -363,6 +382,8 @@ if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px
                     data.foreignVersions.forEach(version => {
                         const row = document.createElement("tr");
                         row.innerHTML = `
+       <td><button class="publish-btn">Publish</button></td>
+        <td><button class="delete-btn">Delete</button></td>         
         <td>${version.id}</td>
         <td>${version.owner}</td>
         <td>${version.versionId}</td>
@@ -414,6 +435,8 @@ _managePublicVersions() {
             publicVersions.forEach(version => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
+         <td><button class="publish-btn">Publish</button></td>
+        <td><button class="delete-btn">Delete</button></td>
            <td>${version.id}</td>
         <td>${version.isPublic}</td>
         <td>${version.isInPublicEditMode}</td>
