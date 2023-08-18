@@ -279,38 +279,37 @@ class SACCockpit extends HTMLElement {
         document.addEventListener("mouseup", this.handleMouseUp);
     }
 
-    _handleMouseMove(e) {
-        if (this.isDragging && this.currentModal) {
-            let newLeft = e.clientX - this.offsetX;
-            let newTop = e.clientY - this.offsetY;
+   _handleMouseMove(e) {
+    if (this.isDragging && this.currentModal) {
+        let newLeft = e.clientX - this.offsetX;
+        let newTop = e.clientY - this.offsetY;
 
-            const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
+        const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
 
-            if (newLeft < cockpitBounds.left) {
-                newLeft = cockpitBounds.left;
-            } else if (newLeft + this.currentModal.offsetWidth > cockpitBounds.left + window.innerWidth) {
-                newLeft = (cockpitBounds.left + window.innerWidth) - this.currentModal.offsetWidth;
-            }
-
-            if (newTop < cockpitBounds.bottom) {
-                newTop = cockpitBounds.bottom;
-            } else if (newTop + this.currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
-                newTop = (cockpitBounds.bottom + window.innerHeight) - this.currentModal.offsetHeight;
-            }
-
-            if (newLeft + this.currentModal.offsetWidth > cockpitBounds.left + window.innerWidth) {
-    newLeft = (cockpitBounds.left + window.innerWidth) - this.currentModal.offsetWidth;
-}
-
-            if (newTop + this.currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
-    newTop = (cockpitBounds.bottom + window.innerHeight) - this.currentModal.offsetHeight;
-}
-
-
-            this.currentModal.style.left = newLeft + "px";
-            this.currentModal.style.top = newTop + "px";
+        // Left boundary
+        if (newLeft < cockpitBounds.left) {
+            newLeft = cockpitBounds.left;
+        } 
+        // Right boundary
+        else if (newLeft + this.currentModal.offsetWidth > cockpitBounds.left + window.innerWidth) {
+            newLeft = (cockpitBounds.left + window.innerWidth) - this.currentModal.offsetWidth;
         }
+
+        // Top boundary
+        if (newTop < cockpitBounds.bottom) {
+            newTop = cockpitBounds.bottom;
+        } 
+        // Bottom boundary
+        else if (newTop + this.currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
+            newTop = (cockpitBounds.bottom + window.innerHeight) - this.currentModal.offsetHeight;
+        }
+
+        this.currentModal.style.left = newLeft + "px";
+        this.currentModal.style.top = newTop + "px";
     }
+}
+
+
 
  _handleMouseUp() {
         this.isDragging = false;
