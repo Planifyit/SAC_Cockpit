@@ -24,8 +24,8 @@
 
 /* Adjust the modal content */
 .modal-content {
-    position: absolute;
-    top: calc(100% + 10px); /* Position it just below the cockpit div */
+     position: absolute;
+    top: -1000px; /* Initially off-screen */
     left: 50%;
     transform: translateX(-50%);
     background-color: #ffffff; /* White background */
@@ -332,10 +332,24 @@ document.addEventListener("mouseup", () => {
                 tableBody.appendChild(row);
             });
 
+  // After fetching the data and before displaying the modal:
+    const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
+    const modalContent = this._shadowRoot.querySelector("#privateVersionsModal .modal-content");
+    
+    modalContent.style.top = `${cockpitBounds.bottom + 10}px`; // 10px is the gap you want between the cockpit and the modal
+    modalContent.style.left = `${cockpitBounds.left}px`;
+    modalContent.style.transform = 'none'; // Reset the transform
+                    
+                    
             // Show the modal
                     const modal = this._shadowRoot.querySelector("#privateVersionsModal");
                     modal.style.display = "block";
                 });
+
+
+
+
+     
         }
 _managePublicVersions() {
     fetch(this.concatenatedUrlPublic)
