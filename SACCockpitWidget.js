@@ -291,8 +291,8 @@ _handleMouseMove(e) {
             newLeft = cockpitBounds.left;
         } 
         // Right boundary
-        else if (newLeft + this.currentModal.offsetWidth > cockpitBounds.left + window.innerWidth) {
-            newLeft = (cockpitBounds.left + window.innerWidth) - this.currentModal.offsetWidth;
+        else if (newLeft + this.currentModal.offsetWidth > window.innerWidth) {
+            newLeft = window.innerWidth - this.currentModal.offsetWidth;
         }
 
         // Top boundary
@@ -308,6 +308,7 @@ _handleMouseMove(e) {
         this.currentModal.style.top = newTop + "px";
     }
 }
+
 
 
 
