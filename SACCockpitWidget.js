@@ -336,7 +336,7 @@ document.addEventListener("mouseup", () => {
     const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
     const modalContent = this._shadowRoot.querySelector("#privateVersionsModal .modal-content");
     
-    modalContent.style.top = `${cockpitBounds.bottom + 10}px`; // 10px is the gap you want between the cockpit and the modal
+    modalContent.style.top = `${cockpitBounds.bottom + 1}px`; // 10px is the gap you want between the cockpit and the modal
     modalContent.style.left = `${cockpitBounds.left}px`;
     modalContent.style.transform = 'none'; // Reset the transform
                     
@@ -384,6 +384,14 @@ _managePublicVersions() {
                 tableBody.appendChild(row);
             });
 
+            // After fetching the data and before displaying the modal:
+    const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
+    const modalContent = this._shadowRoot.querySelector("#publicVersionsModal .modal-content");
+    
+    modalContent.style.top = `${cockpitBounds.bottom + 1}px`; // 10px is the gap you want between the cockpit and the modal
+    modalContent.style.left = `${cockpitBounds.left}px`;
+    modalContent.style.transform = 'none'; // Reset the transform
+                    
             // Show the public versions modal
             const modal = this._shadowRoot.querySelector("#publicVersionsModal");
             modal.style.display = "block";
