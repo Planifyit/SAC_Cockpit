@@ -98,6 +98,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 5px;
+    margin-bottom: 20px;
 }
 
 .buttons > button {
