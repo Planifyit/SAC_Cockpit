@@ -251,14 +251,18 @@ class SACCockpit extends HTMLElement {
         this._shadowRoot.querySelector('#managePrivateVersions').addEventListener('click', this._managePrivateVersions.bind(this));
         this._shadowRoot.querySelector('#managePublicVersions').addEventListener('click', this._managePublicVersions.bind(this));
 
-        this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
-            closeButton.addEventListener("click", () => {
-                const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
-                const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
-                privateModal.style.display = "none";
-                publicModal.style.display = "none";
-            });
-        });
+  this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
+    closeButton.addEventListener("click", () => {
+        const privateModal = this._shadowRoot.querySelector("#privateVersionsModal");
+        const publicModal = this._shadowRoot.querySelector("#publicVersionsModal");
+        privateModal.style.display = "none";
+        publicModal.style.display = "none";
+        
+        // Reset the cockpit's z-index
+        this._shadowRoot.querySelector('.cockpit').style.zIndex = '999';
+    });
+});
+
 
         // Set up mousedown event for each modalContent
         const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
@@ -383,7 +387,8 @@ _handleMouseMove(e) {
     modalContent.style.left = `${cockpitBounds.left}px`;
     modalContent.style.transform = 'none'; // Reset the transform
                     
-                    
+               
+     this._shadowRoot.querySelector('.cockpit').style.zIndex = '998';     
             // Show the modal
                     const modal = this._shadowRoot.querySelector("#privateVersionsModal");
                     modal.style.display = "block";
@@ -434,7 +439,9 @@ _managePublicVersions() {
     modalContent.style.top = `${cockpitBounds.bottom + 10}px`; // 10px is the gap you want between the cockpit and the modal
     modalContent.style.left = `${cockpitBounds.left}px`;
     modalContent.style.transform = 'none'; // Reset the transform
-                    
+    
+            this._shadowRoot.querySelector('.cockpit').style.zIndex = '998';
+              
             // Show the public versions modal
             const modal = this._shadowRoot.querySelector("#publicVersionsModal");
             modal.style.display = "block";
