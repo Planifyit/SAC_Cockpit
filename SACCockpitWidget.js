@@ -14,7 +14,7 @@
 
 
 .modal {
-    display: none;1
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
