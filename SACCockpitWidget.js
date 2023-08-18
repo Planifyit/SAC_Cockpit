@@ -63,7 +63,7 @@
     border-radius: 15px;
     padding: 10px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-     z-index: 999;
+     z-index: 998;
 }
 
 .follow-link {
@@ -304,10 +304,10 @@ _handleMouseMove(e) {
         if (newTop < cockpitBounds.bottom) {
             newTop = cockpitBounds.bottom;
         } 
-        // Bottom boundary
-        else if (newTop + this.currentModal.offsetHeight > window.innerHeight) {
-            newTop = window.innerHeight - this.currentModal.offsetHeight;
-        }
+   // Bottom boundary
+if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px buffer
+    newTop = window.innerHeight - this.currentModal.offsetHeight - 30;
+}
 
         this.currentModal.style.left = newLeft + "px";
         this.currentModal.style.top = newTop + "px";
