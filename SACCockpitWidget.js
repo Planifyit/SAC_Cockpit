@@ -298,6 +298,15 @@ class SACCockpit extends HTMLElement {
                 newTop = (cockpitBounds.bottom + window.innerHeight) - this.currentModal.offsetHeight;
             }
 
+            if (newLeft + this.currentModal.offsetWidth > cockpitBounds.left + window.innerWidth) {
+    newLeft = (cockpitBounds.left + window.innerWidth) - this.currentModal.offsetWidth;
+}
+
+            if (newTop + this.currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
+    newTop = (cockpitBounds.bottom + window.innerHeight) - this.currentModal.offsetHeight;
+}
+
+
             this.currentModal.style.left = newLeft + "px";
             this.currentModal.style.top = newTop + "px";
         }
