@@ -265,10 +265,33 @@ modalContents.forEach(modalContent => {
 
 document.addEventListener("mousemove", (e) => {
     if (isDragging && currentModal) {
-        currentModal.style.left = (e.clientX - offsetX) + "px";
-        currentModal.style.top = (e.clientY - offsetY) + "px";
+        // Calculate the new positions
+        let newLeft = e.clientX - offsetX;
+        let newTop = e.clientY - offsetY;
+
+        // Get the boundaries of the widget (cockpit)
+        const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
+
+        // Constraints for the left position
+        if (newLeft < cockpitBounds.left) {
+            newLeft = cockpitBounds.left;
+        } else if (newLeft + currentModal.offsetWidth > cockpitBounds.right) {
+            newLeft = cockpitBounds.right - currentModal.offsetWidth;
+        }
+
+        // Constraints for the top position
+        if (newTop < cockpitBounds.top) {
+            newTop = cockpitBounds.top;
+        } else if (newTop + currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
+            newTop = (cockpitBounds.bottom + window.innerHeight) - currentModal.offsetHeight;
+        }
+
+        // Apply the constrained positions
+        currentModal.style.left = newLeft + "px";
+        currentModal.style.top = newTop + "px";
     }
 });
+
 
 document.addEventListener("mouseup", () => {
     isDragging = false;
