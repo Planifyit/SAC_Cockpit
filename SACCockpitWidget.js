@@ -258,10 +258,15 @@ modalContents.forEach(modalContent => {
     modalContent.addEventListener("mousedown", (e) => {
         isDragging = true;
         currentModal = modalContent; // Set the current modal being dragged
-        offsetX = e.clientX - modalContent.getBoundingClientRect().left;
-        offsetY = e.clientY - modalContent.getBoundingClientRect().top;
+
+        // Get the initial position of the modal
+        const modalRect = modalContent.getBoundingClientRect();
+
+        offsetX = e.clientX - modalRect.left;
+        offsetY = e.clientY - modalRect.top;
     });
 });
+
 
 document.addEventListener("mousemove", (e) => {
     if (isDragging && currentModal) {
@@ -280,8 +285,8 @@ document.addEventListener("mousemove", (e) => {
         }
 
         // Constraints for the top position
-        if (newTop < cockpitBounds.top) {
-            newTop = cockpitBounds.top;
+        if (newTop < cockpitBounds.bottom) {
+            newTop = cockpitBounds.bottom;
         } else if (newTop + currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
             newTop = (cockpitBounds.bottom + window.innerHeight) - currentModal.offsetHeight;
         }
@@ -292,11 +297,6 @@ document.addEventListener("mousemove", (e) => {
     }
 });
 
-
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-    currentModal = null; // Reset the current modal
-});
 
 
 
