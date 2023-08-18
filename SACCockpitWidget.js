@@ -253,11 +253,16 @@ let currentModal = null; // Store the modal being dragged
 // Get all modal-content elements
 const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
 
-// Loop through each modal-content and attach the drag functionality
+let initialMouseX, initialMouseY; // Store the initial mouse positions
+
 modalContents.forEach(modalContent => {
     modalContent.addEventListener("mousedown", (e) => {
         isDragging = true;
-        currentModal = modalContent; // Set the current modal being dragged
+        currentModal = modalContent;
+
+        // Store the initial mouse positions
+        initialMouseX = e.clientX;
+        initialMouseY = e.clientY;
 
         // Get the initial position of the modal
         const modalRect = modalContent.getBoundingClientRect();
@@ -267,35 +272,40 @@ modalContents.forEach(modalContent => {
     });
 });
 
-
 document.addEventListener("mousemove", (e) => {
     if (isDragging && currentModal) {
-        // Calculate the new positions
+        // Check if the mouse has moved beyond a certain threshold
+        if (Math.abs(e.clientX - initialMouseX) < 10 && Math.abs(e.clientY - initialMouseY) < 10) {
+            return; // If not, don't adjust the modal's position
+        }
+
         let newLeft = e.clientX - offsetX;
         let newTop = e.clientY - offsetY;
 
-        // Get the boundaries of the widget (cockpit)
         const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
 
-        // Constraints for the left position
         if (newLeft < cockpitBounds.left) {
             newLeft = cockpitBounds.left;
         } else if (newLeft + currentModal.offsetWidth > cockpitBounds.right) {
             newLeft = cockpitBounds.right - currentModal.offsetWidth;
         }
 
-        // Constraints for the top position
         if (newTop < cockpitBounds.bottom) {
             newTop = cockpitBounds.bottom;
         } else if (newTop + currentModal.offsetHeight > cockpitBounds.bottom + window.innerHeight) {
             newTop = (cockpitBounds.bottom + window.innerHeight) - currentModal.offsetHeight;
         }
 
-        // Apply the constrained positions
         currentModal.style.left = newLeft + "px";
         currentModal.style.top = newTop + "px";
     }
 });
+
+document.addEventListener("mouseup", () => {
+    isDragging = false;
+    currentModal = null;
+});
+
 
 
 
