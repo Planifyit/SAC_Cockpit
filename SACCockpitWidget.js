@@ -36,8 +36,7 @@
     z-index: 1001;
     max-width: 90%; /* Limit width */
     overflow: auto; /* Scroll if content is too much */
-    overflow-y: auto; /* Add vertical scrollbar if content overflows */
-    max-height: calc(100vh - 150px); /* Adjust this value based on your needs */
+
 }
 
 /* Adjust the close button styling */
