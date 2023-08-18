@@ -55,7 +55,7 @@
 .cockpit {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 400px;
     background-color: #ffffff;
     border-radius: 15px;
     padding: 10px;
