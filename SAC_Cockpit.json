@@ -94,14 +94,37 @@
     "description": "Get the selected ID.",
     "parameters": [],
     "body": "return this.selectedID || undefined;"
-},
+},  
+    "setID": {
+    "description": "set the ID.",
+    "parameters": [
+				{
+					"name": "dv",
+					"type": "string",
+					"description": "set the  id."
+				}
+			],
+    "body": "this.selectedID = dv;"
+},    
 
 	    "getAction": {
     "returnType": "string",
     "description": "Get the selected action.",
     "parameters": [],
     "body": "return this.selectedAction || undefined;"
+},
+	    	    "setAction": {
+    "description": "set the  action.",
+   "parameters": [
+				{
+					"name": "dv",
+					"type": "string",
+					"description": "set the  action."
+				}
+			],
+    "body": "this.selectedAction = dv;"
 }
+	    
     },
     "events": {
         "onActionTriggered": {
