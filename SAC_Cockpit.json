@@ -34,7 +34,7 @@
     "properties": {
         "format": {
 			"type": "string",
-			"description": "date format",
+			"description": "String format",
 			"default": ""
 		},
         "width": {
@@ -79,16 +79,19 @@
     }
     },
     "methods": {
-        "getID": {
-             "returnType": "String",
-			"description": "Gets the ID from the cockpit view",
-			"parameters": [],
-			"body": "return this.format || undefined;"
-      }, 
-         "getAction": {
-            "description": "Gets the Action type from the cockpit view",
-                 "returnType": "String",
-        }
+ "getID": {
+    "returnType": "string",
+    "description": "Get the selected ID.",
+    "parameters": [],
+    "body": "return this.selectedID || undefined;"
+}
+
+	    "getAction": {
+    "returnType": "string",
+    "description": "Get the selected action.",
+    "parameters": [],
+    "body": "return this.selectedAction || undefined;"
+}
     },
     "events": {
         "onActionTriggered": {
