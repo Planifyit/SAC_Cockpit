@@ -74,8 +74,11 @@
     }
     },
     "methods": {
-        "refresh": {
-            "description": "Refresh the cockpit view"
+        "getID": {
+            "description": "Gets the ID from the cockpit view"
+        }, 
+         "getAction": {
+            "description": "Gets the Action type from the cockpit view"
         }
     },
     "events": {
