@@ -183,12 +183,12 @@ th {
                         <tr> 
                         <th>Publish</th>
                          <th>Delete</th>
+                          <th>Description</th>
                             <th>ID</th>
                             <th>Owner</th>
                             <th>Version ID</th>
                             <th>Is In Public Edit Mode</th>
                             <th>Category</th>
-                            <th>Description</th>
                             <th>Source Version ID</th>
                             <th>Creation Time</th>
                             <th>Is Suspended For Input Schedule</th>
@@ -211,13 +211,14 @@ th {
                         <tr>
                           <th>Publish</th>
                          <th>Delete</th>
+                                   <th>Description</th>
                           <th>ID</th>
             <th>Is Public</th>
             <th>Is In Public Edit Mode</th>
             <th>Is Shared</th>
             <th>Owner</th>
             <th>Category</th>
-            <th>Description</th>
+
             <th>Source Version ID</th>
             <th>Creation Time</th>
             <th>Copying Supported</th>
