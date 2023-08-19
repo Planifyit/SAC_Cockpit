@@ -266,27 +266,31 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
     });
 });
 
-this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        const row = e.target.closest("tr");
-        this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
-        this.selectedAction = "publish";
-        console.log("Publish button clicked"); // Check if this logs
-        this.getID();
-        this.getAction();
-    });
-});
 
-this._shadowRoot.querySelectorAll(".delete-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        const row = e.target.closest("tr");
-        this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
-        this.selectedAction = "delete";
-        console.log("Delete button clicked"); // Check if this logs
-        this.getID();
-        this.getAction();
+        _attachButtonListeners() {
+    this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const row = e.target.closest("tr");
+            this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
+            this.selectedAction = "publish";
+            console.log("Publish button clicked");
+            this.getID();
+            this.getAction();
+        });
     });
-});
+
+    this._shadowRoot.querySelectorAll(".delete-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const row = e.target.closest("tr");
+            this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
+            this.selectedAction = "delete";
+            console.log("Delete button clicked");
+            this.getID();
+            this.getAction();
+        });
+    });
+}
+
 
 
 
@@ -414,7 +418,8 @@ getAction() {
     `;
                 tableBody.appendChild(row);
             });
-
+// Attach the event listeners
+this._attachButtonListeners();
   // After fetching the data and before displaying the modal:
     const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
     const modalContent = this._shadowRoot.querySelector("#privateVersionsModal .modal-content");
@@ -472,6 +477,8 @@ _managePublicVersions() {
                 tableBody.appendChild(row);
             });
 
+      // Attach the event listeners
+this._attachButtonListeners();      
             // After fetching the data and before displaying the modal:
     const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
     const modalContent = this._shadowRoot.querySelector("#publicVersionsModal .modal-content");
