@@ -336,15 +336,14 @@ if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px
 
 
 getID() {
+    console.log(this.selectedID);
     return this.selectedID;
-console.log(this.selectedID);
 }
 
-    getAction() {
+getAction() {
+    console.log(this.selectedAction);
     return this.selectedAction;
-        console.log(this.selectedAction);
 }
-
     
  _handleMouseUp() {
         this.isDragging = false;
