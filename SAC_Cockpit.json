@@ -47,6 +47,11 @@
 			"description": "String format",
 			"default": ""
 		},
+	    "selectedType": {
+			"type": "string",
+			"description": "String format",
+			"default": ""
+		},
         "width": {
             "type": "integer",
             "default": 500
@@ -126,7 +131,7 @@
 },
 "getSelectedType": {
     "returnType": "string",
-    "description": "Type of version (private or public)",
+    "description": "Type of version (private or public).",
     "parameters": [],
     "body": "return this.selectedType || undefined;"
 }
