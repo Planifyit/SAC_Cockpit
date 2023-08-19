@@ -355,6 +355,23 @@ getAction() {
     console.log(this.selectedAction);
      return { action: this.selectedAction };
 }
+
+set getID(value) {
+            if (value == undefined || !this.selectedID) return;
+            if (typeof (value) === "string") value = value;
+        
+        }
+set getAction(value) {
+            if (value == undefined || !this.selectedAction) return;
+            if (typeof (value) === "string") value = value;
+         
+        }
+
+
+
+
+
+
     
  _handleMouseUp() {
         this.isDragging = false;
