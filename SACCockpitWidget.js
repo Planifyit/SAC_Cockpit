@@ -12,7 +12,15 @@
 
     }
 
-
+.app-title {
+    font-size: 24px; /* Adjust as needed */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px; /* Space between the title and the buttons */
+    color: #333; /* Dark gray color, adjust as needed */
+    text-transform: uppercase; /* Makes the text all caps */
+    letter-spacing: 1.5px; /* Spacing between letters for a more modern look */
+}
 .modal {
     display: none;
     position: fixed;
@@ -196,6 +204,7 @@ th {
         </style>
         <div class="cockpit">
             <div class="image-container"></div> 
+             <div class="app-title">Cockpit</div>
             <div class="buttons">
                 <button id="managePrivateVersions">Manage Private Versions</button>
                 <button id="managePublicVersions">Manage Public Versions</button>
