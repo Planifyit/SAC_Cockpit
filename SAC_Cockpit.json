@@ -125,7 +125,7 @@
     "body": "this.selectedAction = dv;"
 },
 "selectedType": {
-    "type": "string",
+    "returnType": "string",
     "description": "Type of version (private or public)",
     "default": ""
 }
