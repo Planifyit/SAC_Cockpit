@@ -172,6 +172,8 @@ th {
                 <button id="managePrivateVersions">Manage Private Versions</button>
                 <button id="managePublicVersions">Manage Public Versions</button>
             </div>
+            <div id="actionMessage" style="display: none; text-align: right; margin-top: 10px;">Action triggered</div>
+
             <a href="https://www.linkedin.com/company/planifyit" target="_blank" class="follow-link">Follow us on Linkedin - Planifyit</a>
         </div>
 
@@ -299,6 +301,14 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
 
         // Dispatch the onActionTriggered event
         this.dispatchEvent(new Event("onActionTriggered"));
+         // Close the modals
+            this._shadowRoot.querySelector("#privateVersionsModal").style.display = "none";
+            this._shadowRoot.querySelector("#publicVersionsModal").style.display = "none";
+            this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'auto'; // Enable interactions with the cockpit
+            // Display the "Action triggered" message
+            const actionMessage = this._shadowRoot.querySelector("#actionMessage");
+            actionMessage.style.display = "block"
+            
         });
     });
 
@@ -313,6 +323,14 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
 
              // Dispatch the onActionTriggered event
         this.dispatchEvent(new Event("onActionTriggered"));
+
+         // Close the modals
+            this._shadowRoot.querySelector("#privateVersionsModal").style.display = "none";
+            this._shadowRoot.querySelector("#publicVersionsModal").style.display = "none";
+            this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'auto'; // Enable interactions with the cockpit
+            // Display the "Action triggered" message
+            const actionMessage = this._shadowRoot.querySelector("#actionMessage");
+            actionMessage.style.display = "block"
         });
     });
 }
