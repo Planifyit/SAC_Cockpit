@@ -123,6 +123,11 @@
 				}
 			],
     "body": "this.selectedAction = dv;"
+},
+"selectedType": {
+    "type": "string",
+    "description": "Type of version (private or public)",
+    "default": ""
 }
 	    
     },
