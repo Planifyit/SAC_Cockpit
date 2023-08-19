@@ -355,16 +355,31 @@ getAction() {
     console.log(this._selectedAction);
     return this._selectedAction;
 }
-
+    
 set selectedAction(value) {
     console.log("Action" + value);
     this._selectedAction = value;
+    this.dispatchEvent(new CustomEvent("propertiesChanged", {
+        detail: {
+            properties: {
+                selectedAction: value
+            }
+        }
+    }));
 }
 
 set selectedID(value) {
-       console.log("ID" + value);
+    console.log("ID" + value);
     this._selectedID = value;
+    this.dispatchEvent(new CustomEvent("propertiesChanged", {
+        detail: {
+            properties: {
+                selectedID: value
+            }
+        }
+    }));
 }
+
 
 
 
