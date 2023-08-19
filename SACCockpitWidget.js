@@ -267,7 +267,28 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
 });
 
 
-        _attachButtonListeners() {
+            // Set up mousedown event for each modalContent
+        const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
+        modalContents.forEach(modalContent => {
+            modalContent.addEventListener("mousedown", (e) => {
+                this.isDragging = true;
+                this.currentModal = modalContent;
+
+                const modalRect = modalContent.getBoundingClientRect();
+                this.offsetX = e.clientX - modalRect.left;
+                this.offsetY = e.clientY - modalRect.top;
+            });
+        });
+
+        this.handleMouseMove = this._handleMouseMove.bind(this);
+        this.handleMouseUp = this._handleMouseUp.bind(this);
+
+        document.addEventListener("mousemove", this.handleMouseMove);
+        document.addEventListener("mouseup", this.handleMouseUp);
+    }
+
+
+  _attachButtonListeners() {
     this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const row = e.target.closest("tr");
@@ -292,28 +313,7 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
 }
 
 
-
-
-        // Set up mousedown event for each modalContent
-        const modalContents = this._shadowRoot.querySelectorAll(".modal-content");
-        modalContents.forEach(modalContent => {
-            modalContent.addEventListener("mousedown", (e) => {
-                this.isDragging = true;
-                this.currentModal = modalContent;
-
-                const modalRect = modalContent.getBoundingClientRect();
-                this.offsetX = e.clientX - modalRect.left;
-                this.offsetY = e.clientY - modalRect.top;
-            });
-        });
-
-        this.handleMouseMove = this._handleMouseMove.bind(this);
-        this.handleMouseUp = this._handleMouseUp.bind(this);
-
-        document.addEventListener("mousemove", this.handleMouseMove);
-        document.addEventListener("mouseup", this.handleMouseUp);
-    }
-
+    
 _handleMouseMove(e) {
     if (this.isDragging && this.currentModal) {
         let newLeft = e.clientX - this.offsetX;
