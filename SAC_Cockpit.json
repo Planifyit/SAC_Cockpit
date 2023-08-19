@@ -75,10 +75,12 @@
     },
     "methods": {
         "getID": {
-            "description": "Gets the ID from the cockpit view"
+            "description": "Gets the ID from the cockpit view",
+            "returnType": "String",
         }, 
          "getAction": {
-            "description": "Gets the Action type from the cockpit view"
+            "description": "Gets the Action type from the cockpit view",
+                 "returnType": "String",
         }
     },
     "events": {
