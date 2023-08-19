@@ -289,51 +289,37 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
     }
 
 
-  _attachButtonListeners() {
-    this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
+_attachButtonListeners() {
+    this._shadowRoot.querySelectorAll(".publish-btn, .delete-btn").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const row = e.target.closest("tr");
             this.selectedID = row.querySelector("td:nth-child(8)").textContent; 
-            this.selectedAction = "publish";
-            console.log("Publish button clicked");
-            this.getID();
-            this.getAction();
-
-        // Dispatch the onActionTriggered event
-        this.dispatchEvent(new Event("onActionTriggered"));
-         // Close the modals
-            this._shadowRoot.querySelector("#privateVersionsModal").style.display = "none";
-            this._shadowRoot.querySelector("#publicVersionsModal").style.display = "none";
-            this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'auto'; // Enable interactions with the cockpit
-            // Display the "Action triggered" message
-            const actionMessage = this._shadowRoot.querySelector("#actionMessage");
-            actionMessage.style.display = "block"
+            this.selectedAction = btn.classList.contains("publish-btn") ? "publish" : "delete";
             
-        });
-    });
-
-    this._shadowRoot.querySelectorAll(".delete-btn").forEach(btn => {
-        btn.addEventListener("click", (e) => {
-            const row = e.target.closest("tr");
-            this.selectedID = row.querySelector("td:nth-child(8)").textContent; 
-            this.selectedAction = "delete";
-             console.log("Delete button clicked");
+            console.log(`${this.selectedAction.charAt(0).toUpperCase() + this.selectedAction.slice(1)} button clicked`);
             this.getID();
             this.getAction();
 
-             // Dispatch the onActionTriggered event
-        this.dispatchEvent(new Event("onActionTriggered"));
+            // Dispatch the onActionTriggered event
+            this.dispatchEvent(new Event("onActionTriggered"));
 
-         // Close the modals
-            this._shadowRoot.querySelector("#privateVersionsModal").style.display = "none";
-            this._shadowRoot.querySelector("#publicVersionsModal").style.display = "none";
-            this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'auto'; // Enable interactions with the cockpit
-            // Display the "Action triggered" message
-            const actionMessage = this._shadowRoot.querySelector("#actionMessage");
-            actionMessage.style.display = "block"
+            // Close the modals and display the message
+            this._handlePostButtonClickActions();
         });
     });
 }
+
+_handlePostButtonClickActions() {
+    // Close the modals
+    this._shadowRoot.querySelector("#privateVersionsModal").style.display = "none";
+    this._shadowRoot.querySelector("#publicVersionsModal").style.display = "none";
+    this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'auto'; // Enable interactions with the cockpit
+
+    // Display the "Action triggered" message
+    const actionMessage = this._shadowRoot.querySelector("#actionMessage");
+    actionMessage.style.display = "block";
+}
+
 
 
     
