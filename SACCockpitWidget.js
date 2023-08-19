@@ -360,6 +360,10 @@ getAction() {
     console.log(this._selectedAction);
     return this._selectedAction;
 }
+selectedType() {
+    return this._selectedType;
+}
+
     
 set selectedAction(value) {
     console.log("Action" + value);
@@ -385,8 +389,16 @@ set selectedID(value) {
     }));
 }
 
-
-
+set selectedType(value) {
+    this._selectedType = value;
+    this.dispatchEvent(new CustomEvent("propertiesChanged", {
+        detail: {
+            properties: {
+                selectedType: value
+            }
+        }
+    }));
+}
 
 
     
@@ -426,6 +438,7 @@ set selectedID(value) {
     }
 
  _managePrivateVersions() {
+      this.selectedType = "private";
             fetch(this.concatenatedUrlPrivate)
                 .then(response => response.json())
                 .then(data => {
@@ -477,6 +490,7 @@ this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'none'; // Disa
      
         }
 _managePublicVersions() {
+    this.selectedType = "public";
     fetch(this.concatenatedUrlPublic)
         .then(response => response.json())
         .then(data => {
