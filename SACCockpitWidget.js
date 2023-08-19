@@ -123,6 +123,34 @@
     transform: translateY(0);
 }
 
+.table-btn {
+    height: 30px;
+    border: none;
+    color: #fff;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #FF5370, #FF869A); /* Pink gradient */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer; /* Makes it clear that the button is clickable */
+}
+
+.publish-btn {
+    background: linear-gradient(45deg, #4CAF50, #81C784); /* Green gradient for publish */
+}
+
+.delete-btn {
+    background: linear-gradient(45deg, #FF5370, #FF869A); /* Pink gradient for delete */
+}
+.table-btn:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+.table-btn:active {
+    transform: translateY(0);
+}
+
+
 /* Table styling */
 table {
     width: 100%;
@@ -459,8 +487,8 @@ _resetActionTriggeredMessage() {
                     data.foreignVersions.forEach(version => {
                         const row = document.createElement("tr");
                         row.innerHTML = `
-       <td><button class="publish-btn">Publish</button></td>
-        <td><button class="delete-btn">Delete</button></td>         
+      <td><button class="table-btn publish-btn">Publish</button></td>
+    <td><button class="table-btn delete-btn">Delete</button></td>     
         <td>${version.id}</td>
         <td>${version.owner}</td>
         <td>${version.versionId}</td>
@@ -515,8 +543,8 @@ _managePublicVersions() {
             publicVersions.forEach(version => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-         <td><button class="publish-btn">Publish</button></td>
-        <td><button class="delete-btn">Delete</button></td>
+ <td><button class="table-btn publish-btn">Publish</button></td>
+    <td><button class="table-btn delete-btn">Delete</button></td>
            <td>${version.id}</td>
         <td>${version.isInPublicEditMode}</td>
         <td>${version.isShared}</td>
