@@ -13,13 +13,13 @@
     }
 
 .app-title {
-    font-size: 24px; /* Adjust as needed */
+    font-size: 24px; 
     font-weight: bold;
     text-align: center;
-    margin-bottom: 15px; /* Space between the title and the buttons */
-    color: #333; /* Dark gray color, adjust as needed */
-    text-transform: uppercase; /* Makes the text all caps */
-    letter-spacing: 1.5px; /* Spacing between letters for a more modern look */
+    margin-bottom: 15px; 
+    color: #333; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
 }
 .modal {
     display: none;
@@ -28,7 +28,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-      background-color: rgba(0,0,0,0.4); /* Semi-transparent backdrop */
+      background-color: rgba(0,0,0,0.4); 
     z-index: 1000;
 }
 
@@ -38,23 +38,23 @@
     top: -1000px; /* Initially off-screen */
     left: 50%;
     transform: translateX(-50%);
-    background-color: #ffffff; /* White background */
+    background-color: #ffffff; 
     padding: 20px;
-    border-radius: 20px; /* More rounded corners */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* More pronounced shadow */
+    border-radius: 20px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
     z-index: 1001;
-    max-width: 90%; /* Limit width */
-    overflow: auto; /* Scroll if content is too much */
+    max-width: 90%;
+    overflow: auto; 
 
 }
 
-/* Adjust the close button styling */
+/* the close button styling */
 .close {
     color: #FF5722;
     float: right;
     font-size: 24px;
     cursor: pointer;
-    transition: color 0.3s; /* Smooth transition */
+    transition: color 0.3s; 
     border: none;
     background: none;
 }
@@ -117,7 +117,7 @@
     border: none;
     color: #fff;
     border-radius: 15px;
-    background: linear-gradient(45deg, #FF5370, #FF869A); /* Pink gradient */
+    background: linear-gradient(45deg, #FF5370, #FF869A); 
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
@@ -136,18 +136,18 @@
     border: none;
     color: #fff;
     border-radius: 15px;
-    background: linear-gradient(45deg, #FF5370, #FF869A); /* Pink gradient */
+    background: linear-gradient(45deg, #FF5370, #FF869A); 
     transition: transform 0.3s, box-shadow 0.3s;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    cursor: pointer; /* Makes it clear that the button is clickable */
+    cursor: pointer; 
 }
 
 .publish-btn {
-    background: linear-gradient(45deg, #4CAF50, #81C784); /* Green gradient for publish */
+    background: linear-gradient(45deg, #4CAF50, #81C784); 
 }
 
 .delete-btn {
-    background: linear-gradient(45deg, #FF5370, #FF869A); /* Pink gradient for delete */
+    background: linear-gradient(45deg, #FF5370, #FF869A); 
 }
 .table-btn:hover {
     box-shadow: 0 6px 12px rgba(0,0,0,0.15);
@@ -163,7 +163,7 @@
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px; /* Space between close button and table */
+    margin-top: 20px; 
 }
 
 th, td {
@@ -173,7 +173,7 @@ th, td {
 }
 
 tbody tr:nth-child(odd) {
-    background-color: #f7f7f7; /* Alternating row colors */
+    background-color: #f7f7f7; 
 }
 
 tbody tr:hover {
@@ -182,18 +182,18 @@ tbody tr:hover {
 
 th {
     background-color: #f0f0f0;
-    font-weight: 600; /* Bold headers */
-    text-transform: uppercase; /* Uppercase headers */
-    font-size: 0.9em; /* Slightly smaller font for headers */
+    font-weight: 600; 
+    text-transform: uppercase; 
+    font-size: 0.9em; 
 }
 
-/* Specific styling for tables inside the modals */
+/* styling for tables  */
 #publicVersionsModal th, #privateVersionsModal th {
-    border-bottom: 2px solid black; /* Black bottom border */
+    border-bottom: 2px solid black; 
 }
 
 #publicVersionsModal td, #publicVersionsModal th, #privateVersionsModal td, #privateVersionsModal th {
-    border-right: 1px solid black; /* Right border for each cell */
+    border-right: 1px solid black; 
 }
 
 #publicVersionsModal td:last-child, #publicVersionsModal th:last-child, #privateVersionsModal td:last-child, #privateVersionsModal th:last-child {
@@ -516,11 +516,11 @@ console.log(this.baseURL);
             });
 // Attach the event listeners
 this._attachButtonListeners();
-  // After fetching the data and before displaying the modal:
+  // After fetching the data
     const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
     const modalContent = this._shadowRoot.querySelector("#privateVersionsModal .modal-content");
     
-    modalContent.style.top = `${cockpitBounds.bottom + 5}px`; // 10px is the gap you want between the cockpit and the modal
+    modalContent.style.top = `${cockpitBounds.bottom + 5}px`; 
     modalContent.style.left = `${cockpitBounds.left}px`;
     modalContent.style.transform = 'none'; // Reset the transform
                     
@@ -576,11 +576,11 @@ _managePublicVersions() {
 
       // Attach the event listeners
 this._attachButtonListeners();      
-            // After fetching the data and before displaying the modal:
+            // After fetching the data
     const cockpitBounds = this._shadowRoot.querySelector('.cockpit').getBoundingClientRect();
     const modalContent = this._shadowRoot.querySelector("#publicVersionsModal .modal-content");
     
-    modalContent.style.top = `${cockpitBounds.bottom + 10}px`; // 10px is the gap you want between the cockpit and the modal
+    modalContent.style.top = `${cockpitBounds.bottom + 10}px`; 
     modalContent.style.left = `${cockpitBounds.left}px`;
     modalContent.style.transform = 'none'; // Reset the transform
     
