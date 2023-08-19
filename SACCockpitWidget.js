@@ -347,27 +347,24 @@ if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px
 
 
 getID() {
-    console.log(this.selectedID);
-    return { action: this.selectedID };
+    console.log(this._selectedID);
+      return this._selectedID;
 }
 
 getAction() {
-    console.log(this.selectedAction);
-     return { action: this.selectedAction };
+    console.log(this._selectedAction);
+    return this._selectedAction;
 }
 
-set getID(value) {
-            if (value == undefined || !this.selectedID) return;
-            if (typeof (value) === "string") value = value;
-        
-        }
-set getAction(value) {
-            if (value == undefined || !this.selectedAction) return;
-            if (typeof (value) === "string") value = value;
-         
-        }
+set selectedAction(value) {
+    console.log("Action" + value);
+    this._selectedAction = value;
+}
 
-
+set selectedID(value) {
+       console.log("ID" + value);
+    this._selectedID = value;
+}
 
 
 
