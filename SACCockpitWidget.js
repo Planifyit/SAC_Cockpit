@@ -307,7 +307,7 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
             const row = e.target.closest("tr");
             this.selectedID = row.querySelector("td:nth-child(8)").textContent; 
             this.selectedAction = "delete";
-            console.log("Delete button clicked");
+             console.log("Delete button clicked");
             this.getID();
             this.getAction();
 
@@ -360,7 +360,8 @@ getAction() {
     console.log(this._selectedAction);
     return this._selectedAction;
 }
-selectedType() {
+getSelectedType() {
+    console.log(this._selectedType);
     return this._selectedType;
 }
 
@@ -390,6 +391,7 @@ set selectedID(value) {
 }
 
 set selectedType(value) {
+       console.log("Type" + value);
     this._selectedType = value;
     this.dispatchEvent(new CustomEvent("propertiesChanged", {
         detail: {
