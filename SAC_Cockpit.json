@@ -32,6 +32,11 @@
         }
     ],
     "properties": {
+        "format": {
+			"type": "string",
+			"description": "date format",
+			"default": ""
+		},
         "width": {
             "type": "integer",
             "default": 500
@@ -75,9 +80,11 @@
     },
     "methods": {
         "getID": {
-            "description": "Gets the ID from the cockpit view",
-            "returnType": "String",
-        }, 
+             "returnType": "String",
+			"description": "Gets the ID from the cockpit view",
+			"parameters": [],
+			"body": "return this.format || undefined;"
+      }, 
          "getAction": {
             "description": "Gets the Action type from the cockpit view",
                  "returnType": "String",
