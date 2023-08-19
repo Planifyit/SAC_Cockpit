@@ -127,7 +127,7 @@
 "selectedType": {
     "returnType": "string",
     "description": "Type of version (private or public)",
-    "default": ""
+    "parameters": []
 }
 	    
     },
