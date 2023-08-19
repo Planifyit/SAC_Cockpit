@@ -37,6 +37,16 @@
 			"description": "String format",
 			"default": ""
 		},
+	    "selectedID": {
+			"type": "string",
+			"description": "String format",
+			"default": ""
+		},
+	    "selectedAction": {
+			"type": "string",
+			"description": "String format",
+			"default": ""
+		},
         "width": {
             "type": "integer",
             "default": 500
@@ -84,7 +94,7 @@
     "description": "Get the selected ID.",
     "parameters": [],
     "body": "return this.selectedID || undefined;"
-}
+},
 
 	    "getAction": {
     "returnType": "string",
