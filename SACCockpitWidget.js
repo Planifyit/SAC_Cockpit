@@ -297,6 +297,9 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
             console.log("Publish button clicked");
             this.getID();
             this.getAction();
+
+        // Dispatch the onActionTriggered event
+        this.dispatchEvent(new Event("onActionTriggered"));
         });
     });
 
@@ -308,6 +311,9 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
             console.log("Delete button clicked");
             this.getID();
             this.getAction();
+
+             // Dispatch the onActionTriggered event
+        this.dispatchEvent(new Event("onActionTriggered"));
         });
     });
 }
