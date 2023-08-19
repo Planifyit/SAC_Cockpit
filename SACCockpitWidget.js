@@ -270,6 +270,7 @@ this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
         this.selectedID = row.querySelector("td:nth-child(3)").textContent; // Assuming ID is now in the 3rd column
+        this.selectedAction = "publish";
     });
 });
 
@@ -277,6 +278,7 @@ this._shadowRoot.querySelectorAll(".delete-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
         this.selectedID = row.querySelector("td:nth-child(3)").textContent; // Assuming ID is now in the 3rd column
+        this.selectedAction = "delete";
     });
 });
 
@@ -335,9 +337,15 @@ if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px
 
 getID() {
     return this.selectedID;
-    console.log(this.selectedID);
+console.log(this.selectedID);
 }
 
+    getAction() {
+    return this.selectedAction;
+        console.log(this.selectedAction);
+}
+
+    
  _handleMouseUp() {
         this.isDragging = false;
         this.currentModal = null;
