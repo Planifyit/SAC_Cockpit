@@ -348,12 +348,12 @@ if (newTop + this.currentModal.offsetHeight > window.innerHeight - 30) { // 30px
 
 getID() {
     console.log(this.selectedID);
-    return this.selectedID;
+    return { action: this.selectedID };
 }
 
 getAction() {
     console.log(this.selectedAction);
-    return this.selectedAction;
+     return { action: this.selectedAction };
 }
     
  _handleMouseUp() {
