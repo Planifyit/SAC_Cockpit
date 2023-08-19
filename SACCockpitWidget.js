@@ -274,7 +274,7 @@ class SACCockpit extends HTMLElement {
         this._shadowRoot.appendChild(tmpl.content.cloneNode(true));
 
         this._props = {}; // properties 
-
+        this.baseURL = window.location.origin;
         // Initialize instance variables
         this.isDragging = false;
         this.offsetX = 0;
@@ -478,7 +478,8 @@ _resetActionTriggeredMessage() {
  _managePrivateVersions() {
       this._resetActionTriggeredMessage();
       this.selectedType = "private";
-            fetch(this.concatenatedUrlPrivate)
+console.log(this.baseURL);
+               fetch(this.concatenatedUrlPrivate)
                 .then(response => response.json())
                 .then(data => {
                     const tableBody = this._shadowRoot.querySelector("#privateVersionsTable tbody");
