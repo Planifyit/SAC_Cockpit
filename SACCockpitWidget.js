@@ -296,7 +296,7 @@ _attachButtonListeners() {
             this.selectedID = row.querySelector("td:nth-child(8)").textContent; 
             this.selectedAction = btn.classList.contains("publish-btn") ? "publish" : "delete";
             
-            console.log(`${this.selectedAction.charAt(0).toUpperCase() + this.selectedAction.slice(1)} button clicked`);
+          
             this.getID();
             this.getAction();
 
