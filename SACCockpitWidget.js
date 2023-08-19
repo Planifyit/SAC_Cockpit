@@ -442,8 +442,13 @@ set selectedType(value) {
     document.removeEventListener("mousemove", this.handleMouseMove);
     document.removeEventListener("mouseup", this.handleMouseUp);
     }
+_resetActionTriggeredMessage() {
+    const actionMessage = this._shadowRoot.querySelector("#actionMessage");
+    actionMessage.style.display = "none";
+}
 
  _managePrivateVersions() {
+      this._resetActionTriggeredMessage();
       this.selectedType = "private";
             fetch(this.concatenatedUrlPrivate)
                 .then(response => response.json())
@@ -497,6 +502,7 @@ this._shadowRoot.querySelector('.cockpit').style.pointerEvents = 'none'; // Disa
         }
 _managePublicVersions() {
     this.selectedType = "public";
+     this._resetActionTriggeredMessage();
     fetch(this.concatenatedUrlPublic)
         .then(response => response.json())
         .then(data => {
