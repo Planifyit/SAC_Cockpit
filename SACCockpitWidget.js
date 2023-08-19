@@ -183,12 +183,12 @@ th {
                         <tr> 
                         <th>Publish</th>
                          <th>Delete</th>
-                          <th>Description</th>
                             <th>ID</th>
                             <th>Owner</th>
                             <th>Version ID</th>
                             <th>Is In Public Edit Mode</th>
                             <th>Category</th>
+                            <th>Description</th>
                             <th>Source Version ID</th>
                             <th>Creation Time</th>
                             <th>Is Suspended For Input Schedule</th>
@@ -210,15 +210,13 @@ th {
                     <thead>
                         <tr>
                           <th>Publish</th>
-                         <th>Delete</th>
-                                   <th>Description</th>
+                         <th>Delete</th>        
                           <th>ID</th>
-            <th>Is Public</th>
-            <th>Is In Public Edit Mode</th>
+                 <th>Is In Public Edit Mode</th>
             <th>Is Shared</th>
             <th>Owner</th>
             <th>Category</th>
-
+             <th>Description</th>
             <th>Source Version ID</th>
             <th>Creation Time</th>
             <th>Copying Supported</th>
@@ -293,7 +291,7 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
     this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const row = e.target.closest("tr");
-            this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
+            this.selectedID = row.querySelector("td:nth-child(8)").textContent; 
             this.selectedAction = "publish";
             console.log("Publish button clicked");
             this.getID();
@@ -307,7 +305,7 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
     this._shadowRoot.querySelectorAll(".delete-btn").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const row = e.target.closest("tr");
-            this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
+            this.selectedID = row.querySelector("td:nth-child(8)").textContent; 
             this.selectedAction = "delete";
             console.log("Delete button clicked");
             this.getID();
@@ -494,7 +492,6 @@ _managePublicVersions() {
          <td><button class="publish-btn">Publish</button></td>
         <td><button class="delete-btn">Delete</button></td>
            <td>${version.id}</td>
-        <td>${version.isPublic}</td>
         <td>${version.isInPublicEditMode}</td>
         <td>${version.isShared}</td>
         <td>${version.owner || 'N/A'}</td>
