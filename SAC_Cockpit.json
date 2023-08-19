@@ -124,10 +124,11 @@
 			],
     "body": "this.selectedAction = dv;"
 },
-"selectedType": {
+"getSelectedType": {
     "returnType": "string",
     "description": "Type of version (private or public)",
-    "parameters": []
+    "parameters": [],
+    "body": "return this.selectedType || undefined;"
 }
 	    
     },
