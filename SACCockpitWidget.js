@@ -269,18 +269,25 @@ this._shadowRoot.querySelectorAll(".close").forEach(closeButton => {
 this._shadowRoot.querySelectorAll(".publish-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
-        this.selectedID = row.querySelector("td:nth-child(3)").textContent; // Assuming ID is now in the 3rd column
+        this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
         this.selectedAction = "publish";
+        console.log("Publish button clicked"); // Check if this logs
+        this.getID();
+        this.getAction();
     });
 });
 
 this._shadowRoot.querySelectorAll(".delete-btn").forEach(btn => {
     btn.addEventListener("click", (e) => {
         const row = e.target.closest("tr");
-        this.selectedID = row.querySelector("td:nth-child(3)").textContent; // Assuming ID is now in the 3rd column
+        this.selectedID = row.querySelector("td:nth-child(3)").textContent; 
         this.selectedAction = "delete";
+        console.log("Delete button clicked"); // Check if this logs
+        this.getID();
+        this.getAction();
     });
 });
+
 
 
         // Set up mousedown event for each modalContent
